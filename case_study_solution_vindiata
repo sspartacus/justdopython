@@ -1,0 +1,103 @@
+import sys
+import csv
+import math
+
+characteristics_by_type = None
+with open('AC_characteristics.csv', 'r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        if characteristics_by_type is None:
+            characteristics_by_type = {}
+        else:
+            characteristics_by_type[row[0]] = [int(i) for i in row[1:]]
+            
+            
+hours_by_type = None
+with open('operations.csv', 'r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        if hours_by_type is None:
+            hours_by_type = {}
+        elif row[1] in hours_by_type:
+            hours_by_type[row[1]] += sum(int(i) for i in row[2:])
+        else:
+            hours_by_type[row[1]] = sum(int(i) for i in row[2:])
+            
+            
+print(" Total cost for each aircraft is as follows ")
+total_cost_by_type = {}
+for aircraft_type in characteristics_by_type:
+    hours_flown = hours_by_type[aircraft_type]
+    cost_per_hour = characteristics_by_type[aircraft_type][3]
+    total_cost_by_type[aircraft_type] = hours_flown*cost_per_hour
+    print ("{0}: {1}*{2} = {3}".format(aircraft_type, hours_flown, cost_per_hour, total_cost_by_type[aircraft_type]))     
+    
+    Output:  Total cost for each aircraft is as follows 
+A320: 14875*5000 = 74375000
+A330: 21834*7500 = 163755000
+B737: 11816*5100 = 60261600
+B747: 11037*12000 = 132444000
+Q400: 9476*3500 = 33166000
+ATR72: 9536*2750 = 26224000
+
+lowest_cost = 999999
+lowest_cost_type = None
+number_of_km_by_type = {}
+   
+for aircraft_type in characteristics_by_type:
+    number_of_km_by_type[aircraft_type] = characteristics_by_type[aircraft_type][1]*hours_by_type[aircraft_type]
+    cost_per_seat_per_km = total_cost_by_type[aircraft_type]*(1.0/characteristics_by_type[aircraft_type][2])*(1.0/number_of_km_by_type[aircraft_type])
+    if lowest_cost > cost_per_seat_per_km:
+        lowest_cost = cost_per_seat_per_km
+        lowest_cost_type = aircraft_type
+print ("\nThe aircraft with lowest cost per seat per km is \n{0} comes with a cost_per_seat_per_km of:{1}".format(lowest_cost_type, lowest_cost))
+            
+  Output: The aircraft with lowest cost per seat per km is 
+A330 comes with a cost_per_seat_per_km of:0.03333333333333333
+
+
+
+city_pairs = None
+with open('city_pairs.csv','r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        if city_pairs is None:
+            city_pairs = {}
+        else:
+            city_pairs[row[0] + "," + row[1]] = [int(row [2]),  int(row[3])]
+
+fleet = []
+for city_pair in city_pairs:
+    range_aircrafts = [aircraft_type for aircraft_type in characteristics_by_type if characteristics_by_type[aircraft_type][0] >=city_pairs[city_pair][1]]           
+    lowest_cost_for_city_pair = 999999
+    lowest_cost_type_for_city_pair = None       
+    for aircraft_type in range_aircrafts:
+        number_of_trips = math.ceil(1*city_pairs[city_pair][0]/ characteristics_by_type[aircraft_type][2])
+        cost_for_trip = (city_pairs[city_pair][1]/ characteristics_by_type[aircraft_type][1])* characteristics_by_type[aircraft_type][3]
+        total_cost_incurred = number_of_trips * cost_for_trip
+        if total_cost_incurred < lowest_cost_for_city_pair:
+            lowest_cost_for_city_pair = total_cost_incurred
+            lowest_cost_type_for_city_pair = aircraft_type
+    if lowest_cost_type_for_city_pair not in fleet:
+        fleet.append(lowest_cost_type_for_city_pair)
+    print ("\nFor the city pair: {0} the most suitable aircraft type is:\n{1} with a total cost incurred: {2}".format(city_pair, lowest_cost_type_for_city_pair, lowest_cost_for_city_pair))
+
+print ("\nThe final resultant fleet would consist of: " + ",".join(fleet))
+       
+Output: For the city pair: AA, BB  the most suitable aircraft type is:
+A330 with a total cost incurred: 50000.0
+
+For the city pair: BB, CC  the most suitable aircraft type is:
+A330 with a total cost incurred: 108333.33333333333
+
+For the city pair: CC, AA  the most suitable aircraft type is:
+A320 with a total cost incurred: 5000.0
+
+For the city pair: AA, DD  the most suitable aircraft type is:
+A320 with a total cost incurred: 12500.0
+
+The final resultant fleet would consist of: A330,A320          
+        
+ 
+
+     
