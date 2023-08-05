@@ -1,0 +1,25 @@
+
+1) Apply Full Outer Join between Emp and Dept table 
+2) Select only those Departments which have more than 2 employees 
+3) Select only those Employees whose name start with a
+4) Write a Python code to get the 3rd Repititive Character from a string: 
+3rd non repitive letter 
+aabbc
+
+def func(string): 
+
+   s = input()
+   dict = {}
+
+   count = 0
+
+   for i in s.split():
+      dict[i] += 1
+
+
+    for k,v in dict.items(): 
+        if v == 1: 
+           count += 1 
+        
+        if count == 3: 
+             return k 
