@@ -1,2 +1,15 @@
+Round 1
 1) What is Full Outer Join? 
 2) What are CTE's? 
+
+Round 2 
+1) What is the difference between view and materialized view
+2) Difference between cte and temp table? 
+3) Difference between Union and Union All? 
+4) Left join is Applied between two tables? Tell me the values in Col1 and Col2 
+5) Write a Query to output all the duplicate entries in a table? 
+6) Write a Query to output 3rd highest salary from Emp table ? 
+7) Write a Query to Update Ankita's Salary with Rahul's salary? 
+8) Write a Query to get even Emp_id value employees? 
+9) What is Indexing in SQL? 
+
