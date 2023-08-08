@@ -1,0 +1,49 @@
+Round 1
+1) Apply Full Outer Join between Emp and Dept table 
+2) Select only those Departments which have more than 2 employees 
+3) Select only those Employees whose name start with a
+4) Write a Python code to get the 3rd Repititive Character from a string: 
+3rd non repitive letter 
+aabbc
+
+def func(string): 
+
+   s = input()
+   dict = {}
+
+   count = 0
+
+   for i in s.split():
+      dict[i] += 1
+
+
+    for k,v in dict.items(): 
+        if v == 1: 
+           count += 1 
+        
+        if count == 3: 
+             return k 
+
+Round 2 
+5) Write a Query to output all the duplicate entries in a table? 
+select * from employee
+except 
+select distinct from employee
+
+6) Write a Query to output 3rd highest salary from Emp table ? 
+select * 
+from ( 
+select *, rank() over(partition by empid order by salary desc) as rank
+from employees 
+) tt 
+where rank =3 
+
+7) Write a Query to Update Ankita's Salary with Rahul's salary? 
+UPDATE employees 
+SET Salary = 45000
+WHERE Empfname = 'Ankita' 
+
+8) Write a Query to get even Emp_id value employees? 
+select *
+from employees 
+where EmpId %2 = 0 
