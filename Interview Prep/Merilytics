@@ -3,8 +3,37 @@ Round 1
 2) What are CTE's? 
 
 Round 2 
-1) What is the difference between view and materialized view
+1) What is the difference between View and Materialized-View? 
+Views
+Tuples of the views are computed every time when the view is accessed.
+It does not have any storage cost associated with it.
+It does not have any updation cost associated with it.
+Views are useful when the view is accessed infrequently.
+
+Materialized Views
+Materialized views are not computed every time as the tuples are stored in the database system.
+It does have any storage cost associated with it.
+It does have any updation cost associated with it.
+Materialized views are efficient when the view is accessed frequently as it saves the computation time by storing the results before hand.
+
+
 2) Difference between cte and temp table? 
+Temp Tables are physically created in the tempdb database. These tables act as the normal table and also can have constraints, an index like normal tables.
+CTE is a named temporary result set which is used to manipulate the complex sub-queries data. 
+This exists for the scope of a statement. This is created in memory rather than the Tempdb database. You cannot create an index on CTE.
+It is a temporary result set and typically it may be a result of complex sub-query. Unlike the temporary table, its life is limited to the current query. 
+
+CTE's: 
+It is a temporary result set and typically it may be a result of complex sub-query. Unlike the temporary table, its life is limited to the current query.
+
+Temp Tables
+In SQL Server, temporary tables are created at run-time and you can do all the operations which you can do on a normal table
+
+Table Variable 
+This acts like a variable and exists for a particular batch of query execution. It gets dropped once it comes out of the batch. This is also created in the tempdb database but not the memory. 
+This also allows you to create a primary key, identity at the time of Table variable declaration but not non-clustered index.
+This is also created in the tempdb database but not the memory.
+
 3) Difference between Union and Union All? 
 4) Left join is Applied between two tables? Tell me the values in Col1 and Col2 
 5) Write a Query to output all the duplicate entries in a table? 
@@ -12,4 +41,39 @@ Round 2
 7) Write a Query to Update Ankita's Salary with Rahul's salary? 
 8) Write a Query to get even Emp_id value employees? 
 9) What is Indexing in SQL? 
+10) What are clustered and non-clustered Index? 
+Clustered Index: 
+Whenever you apply clustered indexing in a table, it will perform sorting in that table only. 
+You can create only one clustered index in a table like a primary key.
+A clustered index is as same as a dictionary where the data is arranged in alphabetical order. 
+In a clustered index, the index contains a pointer to block but not direct data. 
+If you apply the primary key to any column, then automatically it will become a clustered index. 
+
+Non-Clustered Index: 
+Similar to the index of a book. 
+The data is stored in one place, and the index is stored in another place.
+Can have multiple non-clustered indexes in a table. 
+
+CREATE NONCLUSTERED INDEX NIX_FTE_Name
+ON Student (Name ASC);
+
+Clustered Index: 
+A clustered index is faster.
+The clustered index requires less memory for operations.
+In a clustered index, the clustered index is the main data.
+A table can have only one clustered index.
+The clustered index has the inherent ability to store data on the disk.
+A Clustered index is a type of index in which table records are physically reordered to match the index.
+
+Non-Clustered Index: 
+A non-clustered index is slower.
+A non-Clustered index requires more memory for operations.
+In the Non-Clustered index, the index is the copy of data.
+A table can have multiple non-clustered indexes.
+A non-Clustered index does not have the inherent ability to store data on the disk.
+A Non-Clustered index is a special type of index in which the logical order of the index does not match the physical stored order of the rows on the disk.
+
+11) Name the different types of Constraints? 
+
+
 
