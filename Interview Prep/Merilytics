@@ -74,6 +74,10 @@ A non-Clustered index does not have the inherent ability to store data on the di
 A Non-Clustered index is a special type of index in which the logical order of the index does not match the physical stored order of the rows on the disk.
 
 11) Name the different types of Constraints? 
+12) What is partitioning in SQL? 
+Partitioning is the database process where very large tables are divided into multiple smaller parts. 
+By splitting a large table into smaller, individual tables, queries that access only a fraction of the data can run faster because there is less data to scan. 
+The main of goal of partitioning is to aid in maintenance of large tables and to reduce the overall response time to read and load data for particular SQL operations.
 
 
 
