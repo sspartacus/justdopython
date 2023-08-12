@@ -1,0 +1,50 @@
+23) Non-Abundant Sums: 
+# # Enter your code here. Read input from STDIN. Print output to STDOUT
+
+import math 
+def sum_proper_div(num): 
+    s = 0
+    for i in range(2,int(math.sqrt(num))+1): 
+        if num%i == 0: 
+            s +=i 
+            y = num//i
+            if i!= y: 
+                s += y 
+            
+    return s+1 
+
+abun_arr = []
+
+for i in range(12,28123):
+    if  sum_proper_div(i) > i: 
+        abun_arr.append(i)
+            
+N = int(input())
+
+for i in range(N): 
+    num  = int(input())
+
+    if num < 24: 
+        print ('NO')
+    elif num > 28123 :
+        print ('YES')
+        
+    else: 
+        found = False
+        for item1 in abun_arr: 
+            if num-item1 in abun_arr:
+                found = True 
+                break
+        if found: 
+            print('YES')
+        else: 
+            print('NO')
+
+25) 
+
+                
+
+            
+
+
+
