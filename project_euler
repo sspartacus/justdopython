@@ -40,7 +40,24 @@ for i in range(N):
         else: 
             print('NO')
 
-25) 
+25) N-Digit Fibonacci 
+fib = [0,1,1]
+cache = {1:1}
+j =2 
+size = 10 
+
+for i in range(3,25000):
+    fib.append(fib[i-1] + fib[i-2])
+    
+    if fib[i] >= size:
+        cache[j] = i
+        size*= 10 
+        j+=1 
+        
+N = int(input())
+        
+for i in range(N): 
+    print (cache[int(input())])
 
                 
 
