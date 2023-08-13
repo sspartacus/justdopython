@@ -59,6 +59,32 @@ N = int(input())
 for i in range(N): 
     print (cache[int(input())])
 
+24) Lexicographic Permutations
+from math import factorial
+def lint(n):
+    if n==int(n):
+        return int(n)
+    else:
+        return int(n)+1
+word='abcdefghijklm'
+li=[]
+for i in sorted(word):
+    li.append(i)
+
+def answer_calc(pos,lis):
+    answer=''
+    for i in range(len(word)-1,-1,-1):
+        index=lint(pos/factorial(i))-1
+        answer+=lis.pop(index)
+
+        pos+=-(index)*factorial(i)
+
+    return answer
+for _ in range(int(input())):
+    n=int(input())
+    print(answer_calc(n,li[:]))
+
+
                 
 
             
