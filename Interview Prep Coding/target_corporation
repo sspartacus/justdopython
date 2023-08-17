@@ -1,0 +1,28 @@
+
+Q.1) Convert the names of Product table columns in capital letters? 
+select  Product id as 'PRODUCT ID', title as 'TITLE', description as 'DESCRIPTION',  category AS 'category' from Product 
+
+Q.2)  Output all the title values in the same table where title consists of the word christmas? 
+select * from Product where title ilike '%christmas%'
+
+Q.3) Make a seperate colour the colour of Product where Product title is of the form 'Words in Sentence-Black'?
+select split_part(title,'-',2) as colour 
+from Product 
+
+Q.4) There exists a transaction table. 
+a) Output all the transactions happened and the total amount of revenue received from each product? 
+b) Bucket the products into total_sales categories. 
+c) List all the product where their total sales is greater than their groups average total sales? 
+
+select Product id, sum(sales_price*units) as total_sales, 
+case when sum(sales_price*units)  < 100 then 'below_100'
+when sum(sales_price*units) between 100 and 1000 then 'between_100_and_1000'
+when sum(sales_price*units) between 1000 and 2000 then 'between_1000_and_2000'
+else 'above_2000' end as buckets
+
+from Transactions as t 
+join product as p on t.Product_id = p.Product_id
+where extract ('year' from order_date) = 2023 and units > 0 
+group by 1 
+
+
