@@ -1,0 +1,44 @@
+1) LEAP YEAR: 
+def is_leap(year):
+    leap = False
+    # Write your logic here
+    if year%4 == 0: 
+        if year%100 == 0: 
+            if year%400 == 0: 
+                leap = True 
+            else: 
+                leap = False 
+        else: 
+            leap = True
+    else: 
+        leap = False  
+    return leap
+year = int(input())
+print(is_leap(year))
+
+2) MERGE THE TOOLS
+import textwrap
+from collections import OrderedDict
+
+def merge_the_tools(string, k):
+    list = textwrap.wrap(string, k)
+    
+    for i in list: 
+            print (''.join(dict.fromkeys(i)), end = '\n')
+
+3) TIMEDELTA 
+import datetime
+
+def time_delta(t1, t2):
+    format_data = "%a %d %b %Y %H:%M:%S %z"
+    
+    parsed_t1 = datetime.datetime.strptime( t1, format_data)
+    parsed_t2 = datetime.datetime.strptime( t2, format_data)
+    
+    diff = parsed_t1-parsed_t2
+    
+    return  str(int(abs(diff.total_seconds()))) 
+
+
+
+
