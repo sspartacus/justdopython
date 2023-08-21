@@ -39,6 +39,141 @@ def time_delta(t1, t2):
     
     return  str(int(abs(diff.total_seconds()))) 
 
+4) FIND ANGLE MBC 
+from math import degrees, atan2
+
+AB = float(input())
+BC = float(input())
+
+MBC = round(degrees(atan2(AB, BC)))
+print((str(MBC)), chr(176), sep='')
+
+5) WORD ORDER: 
+from collections import Counter
+N = int(input())
+arr = [input() for i in range(N)] 
+c = Counter(arr)
+
+print (len(c)) 
+brr = [str(c[keys]) for keys in c.keys()] 
+print (' '.join(brr))
+
+6) COMPRESS THE STRING
+from itertools import groupby 
+
+for key, group in groupby( input()): 
+    print( '({}, {})'.format(len(list(group)), key), end = " ")
+
+7) COMPANY LOGO: 
+from collections import Counter 
+
+    s = input()
+    c = Counter(s)
+    c = sorted(c.items(), key= lambda x:(-x[1], x[0]) )
+
+    count = 0 
+    for key, values in c: 
+        print (' '.join([key, str(values) ]), end = '\n')
+        count += 1
+        if count > 2:
+            break 
+
+8) TRIANGLE QUEST 2 
+for i in range(1,int(input())+1): 
+    print (((10**i-1)//9)**2)
+
+9) ITERABLES AND ITERATORS: 
+from itertools import combinations 
+N = int(input())
+L = input().split()
+K = int(input()) 
+
+C  = list(combinations(L, K)) 
+fil = filter(lambda c: 'a' in c, C)  
+print ("{0:0.3}".format(len(list(fil))/ len(C) ) )
+
+10) ATHLETE SORT 
+    nm = input().split()
+    n = int(nm[0])
+    m = int(nm[1])
+    arr = []
+
+    for _ in range(n):
+        arr.append(list(map(int, input().rstrip().split())))
+    k = int(input())
+    P = sorted(arr, key = lambda row:row[k] )
+    for i in range(len(P)): 
+        for j in range(len(P[i])): 
+            print (P[i][j], end=' ') 
+        print()
+
+11) ginortS: 
+s = input()
+a = []
+b = [] 
+c = []
+d = []
+
+for i in s: 
+    if i.isalpha() == True and i.islower() == True : 
+        a.append(i)
+    elif i.isalpha() == True and i.isupper() == True:
+        b.append(i)
+    elif  i.isdigit() == True and int(i)%2 == 0 :  
+        c.append(i)
+    elif i.isdigit() == True and int(i)%2 != 0: 
+        d.append(i)
+sorted_string = ''.join(sorted(a) + sorted(b) + sorted(d) + sorted(c))
+print (sorted_string)
+
+12) REGEX SUBSTITUTION 
+import re 
+N = int(input()) 
+
+for i in range(N):
+    line = input()
+    and_regex = re.compile(r'(?<= )(&&)(?= )')
+    or_regex = re.compile(r'(?<= )(\|\|)(?= )')
+    
+    line = re.sub( and_regex, 'and', line)
+    line = re.sub( or_regex, 'or', line) 
+    print (line)
+
+13) REDUCE FUNCTION: 
+>>> from fractions import gcd
+>>> reduce(gcd, [2,4,8], 3)
+OUT: 1 
+
+14) RE.START() AND RE.END(): 
+import re 
+s = input()
+k = input()
+t = f'(?=({k}))'
+m = re.findall(t, s)
+
+if len(m) == 0: 
+    print((-1, -1))
+    exit 
+for i in re.finditer(t,s): 
+    print ((i.start(), i.start() + len(k) -1) , sep='\n') 
+
+15) DECORATORS: 
+import operator
+def person_lister(f):
+    def inner(people):
+        for name in people: 
+            name[2]= int(name[2]) 
+        sorted_list = sorted( people, key=operator.itemgetter(2))
+        return list(map(lambda x:f(x), sorted_list))
+    return inner
+
+@person_lister
+def name_format(person):
+    return ("Mr. " if person[3] == "M" else "Ms. ") + person[0] + " " + person[1]
+
+if __name__ == '__main__':
+    people = [input().split() for i in range(int(input()))]
+    print(*name_format(people), sep='\n')
 
 
 
