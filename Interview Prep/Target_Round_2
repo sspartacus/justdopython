@@ -1,0 +1,14 @@
+1) What is the difference between WHERE and HAVING clause in SQL? 
+2) If a table A contains 100 rows and table B contains 1000 rows then what is the min and max number of rows
+possible in the resultant left join? 
+A LEFT JOIN B 
+MAX(ROWS) = 100*1000 (When all entries in A and B will be same)
+MIN(ROWS) = 100 (When all entries in A and B will be different)
+3) What is the order of execution in a SQL query? 
+4) Where does Rank function comes in the SQL order execution query? 
+5) Given a input table, Can you pivot the same table after writing SQL query? 
+6) What is the difference between UNION and UNION ALL keyword statements? 
+7) Given 8 balls having a single defective ball and weighing scale, in how many minimum number of tries you can find out the defective ball? '
+8) Trains are moving in opposite direction with speed 60kmph and 40kmph and distance between them is 100km , in how much will the two trains pass each other? 
+
+
