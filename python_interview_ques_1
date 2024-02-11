@@ -1,0 +1,85 @@
+Q.1) INHERITANCE AND POLYMORPHISM? 
+INHERITANCE: Allows to define a class that inherits all the properties and method from the parent class 
+Below Student class is inheriting properties from the Parent class Person. 
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+  def printname(self):
+    print(self.firstname, self.lastname)
+#Use the Person class to create an object, and then execute the printname method:
+x = Person("John", "Doe")
+x.printname()
+
+class Student(Person):
+  pass
+x = Student("Mike", "Olsen")
+x.printname()
+
+POLYMORPHISM: Class with Methods can be used by other classes. It is the property of having many forms. 
+Below you can see different classes with the same method. With polymorphism we are able to use only a single statement to use the method from all the 3 classes. 
+CLASS POLYMORPHISM: 
+class Car:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+
+  def move(self):
+    print("Drive!")
+
+class Boat:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+
+  def move(self):
+    print("Sail!")
+
+class Plane:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+
+  def move(self):
+    print("Fly!")
+
+car1 = Car("Ford", "Mustang")       #Create a Car class
+boat1 = Boat("Ibiza", "Touring 20") #Create a Boat class
+plane1 = Plane("Boeing", "747")     #Create a Plane class
+
+for x in (car1, boat1, plane1):
+  x.move()
+
+2) What is Method Overriding in python? 
+It allows a child class to provide a specific implementation of a method that is already provided by one of its super-classes or parent classes. 
+Below, move method in boat and plane are overriding move method of Vehicle Class. 
+class Vehicle:
+  def __init__(self, brand, model):
+    self.brand = brand
+    self.model = model
+
+  def move(self):
+    print("Move!")
+
+class Car(Vehicle):
+  pass
+
+class Boat(Vehicle):
+  def move(self):
+    print("Sail!")
+
+class Plane(Vehicle):
+  def move(self):
+    print("Fly!")
+
+car1 = Car("Ford", "Mustang") #Create a Car object
+boat1 = Boat("Ibiza", "Touring 20") #Create a Boat object
+plane1 = Plane("Boeing", "747") #Create a Plane object
+
+for x in (car1, boat1, plane1):
+  print(x.brand) #POLYMORPHISM 
+  print(x.model)
+  x.move()
+
+
+
