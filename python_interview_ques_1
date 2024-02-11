@@ -82,4 +82,80 @@ for x in (car1, boat1, plane1):
   x.move()
 
 
+Q.3) GENERATOR in Python? 
+
+Q.4) PYTHON ITERATORS: 
+An iterator is an object that can be iterated upon, means you can iterate through all values. 
+Below you can an iterator object is created using __iter__ and __next__ methods. 
+class MyNumbers:
+  def __iter__(self):
+    self.a = 1
+    return self
+
+  def __next__(self):
+    if self.a <= 20:
+      x = self.a
+      self.a += 1
+      return x
+    else:
+      raise StopIteration
+
+myclass = MyNumbers()
+myiter = iter(myclass)
+
+for x in myiter:
+  print(x)
+
+Q.5 SCOPE in python? 
+A variable is only available inside the region it is created
+Variable can used by a function inside a function. 
+Variables with Global scope could be used by anyone. 
+
+Q.6 MODULE in python? 
+It's a set of function who want to include in your code. 
+Greeting is a function defined in mymodule. 
+def greeting(name):
+  print("Hello, " + name) # save this as mymodule.py 
+
+import mymodule
+mymodule.greeting("Jonathan")
+
+Q.7) DATE in python? 
+strftime() method is used to format date objects into readable strings
+
+import datetime 
+x = datetime.datetime.now()
+print(x.strftime('%A'))
+
+Q.8) MATH functions: 
+import math 
+x = math.sqrt(64)
+x = math.ceil(1.4)
+y = math.floor(1.4)
+x = math.pi
+
+x = min(5, 10, 25)
+y = max(5, 10, 25)
+x = abs(-7.25)
+x = pow(4, 3)
+
+Q.9 JSON in Python: 
+Json is a syntax used to storing and exchanging data 
+
+import json 
+a = '{"name": "Suresh", "age": 30, "Gender": "male"}'
+x = json.loads(a) #parse json to python 
+print(x['Gender'])
+
+import json 
+# a python object (dict)
+a = {"name": "Neha", "age": 30, "Gender": "Female"}
+f = json.dumps(a) #converting python to json 
+print(f)
+
+Q.10 REGEX in Python? 
+
+
+
+
 
