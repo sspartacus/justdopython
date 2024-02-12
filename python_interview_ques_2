@@ -125,5 +125,17 @@ def myfunc(n):
 mydoubler = myfunc(2)
 print(mydoubler(11))
 
-Q.19) 
+Q.19) What's the difference between a list and an array? 
+Lists can be made up of elements of different data type
+Numberical Operations Cannot be directly performed 
+Consume More Memory 
+No need to explicitly import a module for the declaration
+
+Arrays are made up of elements of same data type
+Numerical Operations can be directly performed 
+Consume Less Memory 
+Need to explicitly import the array module for declaration
+
+Q.20) 
+
 
