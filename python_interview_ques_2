@@ -136,6 +136,15 @@ Numerical Operations can be directly performed
 Consume Less Memory 
 Need to explicitly import the array module for declaration
 
-Q.20) 
+Q.20)  PYTHON ARRAYS: 
+An array is a special variable, which can hold more than one value at a time.
+NOTE: Python does not have built-in support for Arrays, but Python Lists can be used instead.
+
+cars.append("Honda")
+cars.remove("BMW")
+cars.pop(1)
+cars.reverse()
+cars.sort()
+type(cars)
 
 
