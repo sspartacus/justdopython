@@ -82,7 +82,19 @@ for x in (car1, boat1, plane1):
   x.move()
 
 
-Q.3) GENERATOR in Python? 
+Q.3) GENERATOR Function/Object in Python? 
+It used yeild keyword to return values rather than return keyword. And it yeild one value at a time 
+def simpleGeneratorFun(): 
+    yield 1
+    yield 2
+    yield 3
+# x is a generator object 
+x = simpleGeneratorFun() 
+# Iterating over the generator object using next 
+# In Python 3, __next__() 
+print(next(x)) 
+print(next(x)) 
+print(next(x))
 
 Q.4) PYTHON ITERATORS: 
 An iterator is an object that can be iterated upon, means you can iterate through all values. 
