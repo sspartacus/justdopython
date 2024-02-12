@@ -30,4 +30,100 @@ set2 = {1, 2, 3}
 set3 = set1.union(set2 #set1.update(set2) #x.intersection_update(y) # x.intersection(y) #x.symmetric_difference(y)
 print(set3)
 
-Q.13
+Q.13 Calculating Execution time in Python? 
+from datetime import datetime
+# record current timestamp
+start = datetime.now()
+# create loop-setup for testing
+a = 0
+for i in range(1000):
+    a += (i**100)
+# record loop end timestamp
+end = datetime.now() 
+# find difference loop start and end time and display
+td = (end - start).total_seconds() * 10**3
+print(f"The time of execution of above program is : {td:.03f}ms")
+
+Q.14 DECORATORS in python? 
+They are used to modify the behaviour of function or class.
+They allow us to wrap another function in order to extend the behaviour of the wrapped function, without permanently modifying it
+
+# defining a decorator
+def hello_decorator(func):
+    # inner1 is a Wrapper function in 
+    # which the argument is called
+    # inner function can access the outer local
+    # functions like in this case "func"
+    def inner1():
+        print("Hello, this is before function execution")
+        # calling the actual function now
+        # inside the wrapper function.
+        func()
+        print("This is after function execution")
+    return inner1
+ 
+# defining a function, to be called inside wrapper
+def function_to_be_used():
+    print("This is inside the function !!")
+
+# passing 'function_to_be_used' inside the
+# decorator to control its behaviour
+function_to_be_used = hello_decorator(function_to_be_used)
+
+# calling the function
+function_to_be_used()
+
+Q.15) CLASS in Python? 
+A Class is an object constructer or "Blueprint" for creating objects. 
+
+class Person:
+  def __init__(mysillyobject, name, age):
+    mysillyobject.name = name
+    mysillyobject.age = age
+
+  def myfunc(abc):
+    print("Hello my name is " + abc.name)
+
+p1 = Person("John", 36)
+p1.myfunc()
+
+Q.16) DATAFRAME METHODS 
+drop_duplicates()
+dropna()
+value_counts()
+fillna()
+isnull()
+unique()
+isin()
+astype() / dtypes()
+sort_values()/sort_index()
+rename()
+columns()
+shape()
+
+Q.17) CHECK PRIME NUMBER: 
+num = 103
+# If given number is greater than 1
+if num > 1:
+    # Iterate from 2 to n / 2
+    for i in range(2, int(num/2)+1):
+        # If num is divisible by any number between
+        # 2 and n / 2, it is not prime
+        if (num % i) == 0:
+            print(num, "is not a prime number")
+            break
+    else:
+        print(num, "is a prime number")
+else:
+    print(num, "is not a prime number")
+
+Q.18) LAMBDA Function? 
+A lambda function can take any number of arguments, but can only have one expression.
+
+def myfunc(n):
+  return lambda a : a * n
+mydoubler = myfunc(2)
+print(mydoubler(11))
+
+Q.19) 
+
