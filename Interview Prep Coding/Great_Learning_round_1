@@ -1,0 +1,24 @@
+Q.1 a) What is the difference between RandomForest and Decision Trees? Which one do you prefer? 
+b) Random forest is more sensitive to outlier or Decision tree? 
+Q.2 Tell me about one of you Machine Learning Projects that you were part of? 
+Q.3 How do you rate yourself in Python? 
+Q.4 Write a Python code to calculate the count of vowels in a string? 
+# count vowels
+s = input()
+def count_vowel(s): 
+  count = 0
+  arr = ['a', 'e', 'i', 'o', 'u']
+  for i in range(len(s)): 
+    if s[i] in arr: 
+      count += 1
+  return count 
+
+Q.5 How to identify data type in Python? 
+arr = ['a', 'e', 'i', 'o', 'u']
+type(arr)
+
+Q.6 What would you identify Null Values in a dataset? And how do you deal with those? 
+Q.7) If the data is having Male and Female then how would you do the imputation and how if the data is numerical? 
+Q.8) What would you identify outliers in a dataset? 
+Q.9) What is Conditional probability? 
+
