@@ -1,0 +1,14 @@
+Q.1 DIFFERENCE BETWEEN CLASSIFICATION AND REGRESSION 
+Classification                                      Regression 
+Discrete Output Variable                            Continous Output Variable 
+Ex. Spam Classification                             Ex. House Price, Engagement Score prediction 
+Ex. Logistic Regression, Naive Bayes                Liner Regression, Ridge, Lasso Regression 
+F-1 Score, Precision, Recall                        R2-score, MSE, MAPE
+
+Q.2) What is RandomForestClassifer? How does it works? 
+When using Random Forest for classification, each tree gives a classification or a “vote.” 
+The forest chooses the classification with the majority of the “votes.” 
+When using Random Forest for regression, the forest picks the average of the outputs of all trees.
+There is low (or no) correlation between the decision trees that make up the larger Random Forest model. One tree causing error does not affect the whole decision. 
+
+Q.3) 
