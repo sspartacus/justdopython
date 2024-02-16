@@ -1,0 +1,49 @@
+Q.1 Table: Student
++---------------------+---------+
+| Column Name | Type |
++---------------------+----------+
+| name | varchar |
+| subject | varchar |
+| marks | int |
++---------------------+-----------+
+
+Get the total of top three subject marks for each student
+
+Select name,  sum(mark) as total_marks
+From ( 
+Select name, subjects, mark, rank() over(partition by name order by marks desc) as sub_rank  
+From student
+) tt 
+Where sub_rank <=3 
+Group by name
+
+Q.2 
+Table: Rent
++---------------------+---------+
+| Column Name | Type |
++---------------------+----------+
+| student_id | int |
+| name | varchar |
+| date | date |
+| rent_paid | int |
++---------------------+-----------+
+
+List the months where each user skipped the rent. (Assuming there’s a calendar table)
+
+Select distinct r.student_id, name, date_trunc(‘month’  c.month  ) as month 
+From calendar c
+Left join Rent r on date_trunc(‘month’, ’r.date) = date_trunc(‘month’  c.month  )
+Where date_trunc(‘month’, ’r.date)  is null 
+
+Q.3) Tell me about how each Joins work? 
+INNER JOIN 
+LEFT JOIN 
+FULL OUTER JOIN
+
+Q.4) Tell me about some of your projects that you did? 
+
+Q.5) What are day to day tasks at Porter? 
+
+
+
+
