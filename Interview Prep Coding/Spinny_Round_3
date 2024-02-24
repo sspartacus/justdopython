@@ -1,0 +1,23 @@
+
+
+
+Q.1 TABLE emp_id, timestamp, event_type
+select emp_id, sum(total_hours) as total_time
+from ( 
+select emp_id, t1.timestamp, event_type, rnk, 
+t2.timestamp as last_timestamp, extract('hour' from t1.timestamp- t2.timestamp) as total_hours
+
+from ( 
+select emp_id, timestamp, event_type, row_number() (partition by emp_id order by timestamp desc) as rnk 
+from Rosters r1 
+) t1
+inner join ( 
+select emp_id, timestamp, event_type, row_number() (partition by emp_id order by timestamp desc) as rnk 
+from Rosters r1 
+) t2 on t1.rnk = t2.rnk+1 and t1.emp_id = t2.emp_id and t1.event = 'IN' 
+) tt 
+group by emp_id
+
+Q.2 Tell me about some of the projects that you are proud of? 
+Q.3 Why do you want to leave your current job? 
+Q.4 Tell me something about Spinny? 
