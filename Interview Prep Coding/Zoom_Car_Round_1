@@ -1,0 +1,50 @@
+
+Booking						User			Car	
+car_id	starts	ends	Total_fare		id	city		id	type	city
+
+Q1	MOM for past 6 months across cities ATV and ATD
+select date_trunc('month', ends) as date, avg(extract('hour' from ends-starts))  as avg_time_duration_hrs,  avg(total_fare) as avg_fare
+from Booking 
+where ends >= now()::date - interval '6 month'
+group by 1 
+
+Q2	for last one month top 3 earning cars in each type
+select type, car_id
+from ( 
+select car_id, Car.type, dense_rank() over(partition by Car.type order by sum(Total_fare) desc) as rnk , 
+sum(Total_fare) as total_earnings 
+
+from Booking 
+left join Car on Booking.car_id =  Car.id
+where ends >= now()::date - interval '1 month'
+group by 1,2,3
+) tt 
+where rnk <=3 
+
+Q3			
+	Employee		
+	id	Status	timestamp
+	1	in	10
+	2	in	11
+	1	out	12
+	3	in	13
+	1	in	13
+	1	out	18
+	2	out 	18
+	NO OF EMPLOYEES WHO SPENT MORE THAN 8 HOURS AND LESS THAN 8 HOURS IN OFFICE	? 
+
+Sol. 
+select count(distinct case when total_time_spent >=8 then id end) as total_employees_more_than_equal_8, 
+count(distinct case when total_time_spent < 8 then id end) as total_employees_less_than_8
+from ( 
+select id, sum(total_hours) as total_time_spent
+from ( 
+select id, timestamp, lead(timestamp) over(partition by id order by timestamp )   as last_timestamp, 
+extract('hour' from lead(timestamp) over(partition by id order by timestamp ) - timestamp ) as total_hours
+from Employee 
+where Status = 'Out'
+) tt 
+group by 1 
+-- where last_timestamp is not null 
+) tt 
+
