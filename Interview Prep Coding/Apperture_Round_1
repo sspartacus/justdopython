@@ -1,0 +1,36 @@
+Student_id, name, Batch 
+Student_ID, SUBJECT, marks
+
+Q.1 Get top three students for each batch? 
+select Batch, name
+from ( 
+select total_marks.Student_ID, name, Batch, dense_rank() over(partition  by Batch order by tot_marks desc) as rnk 
+from (select Student_ID, sum(marks) as tot_marks from subject_marks group by Student_ID) total_marks 
+left join student s on s.Student_id =  total_marks .Student_id
+) tt  
+where rnk <= 3 
+
+Q.2 Create a Pivot table having Subjects as Columns? 
+select Student_ID, 
+max(case when SUBJECT = 'Maths' then marks end) as maths
+from subject_mar
+group by Student_ID 
+
+Q.3 df  :  Login information of users in a mobile app
+Timestamp                      user_id
+2022-01-01  09:06:55           101
+2022-01-01  09:07:16           101
+2022-01-01  09:07:20           102
+
+On how many weekdays did each user login on the app. (assume that a function is_weekday() is already created for your ease, to which you can pass a string and it gives you weather it is a weekday )
+import pandas as pd 
+
+df['Timestamp'] = df['Timestamp'].to_dtype(str)  
+df['t_or_f'] = is_weekday(df['Timestamp'])
+df.apply( df['Timestamp'], lambda x: )
+
+df_2 = pd.DataFrame({is_weekday(df['Timestamp']: 't_or_f', 
+df['user_id']: 'user_id'}))
+
+df_2.groupby(df_2['user_id']).aggregate().sum()
+df_2
