@@ -1,0 +1,37 @@
+Q.1 How does Cross-Validation helps in testing models? 
+It helps to prevent overfitting by providing a more robust estimate of model's performance on unseen data. 
+It is used to compare different models and select the one that performs best on average. 
+
+Q.2 Determine the least appropriate scenario to model using a Poisson Distribution? 
+The scenario where the events are not independent or the average rate is not known. 
+
+Q.3 Is Relu a Continous and Differential function? 
+No. ReLu is differntiable at all places except for z=0. 
+RelU is a Continuous function
+
+Q.4 L2 Penalty in Ridge and L1 penalty in Lasso Regression? 
+L2 Penalty: 
+It uses sum of squares of the parameters 
+It shrinks coeffecients towards zero but never to absloute zero. 
+Ridge encourages sum to be small 
+
+L1 Penalty: 
+It uses sum of absolute value of the parameters 
+Lasso encourages sum to be small 
+
+Q.5 Tests of Significance? 
+T-Tests: Checks whether a sample is from a population or whether multiple samples indicate their populations are equal.
+F-Tests: Investigates whether two populations are equal based on the variances of two samples from those populations.
+
+Q.6 P-Value
+P values are used in hypothesis testing to help decide whether to reject the null hypothesis.
+p < 0.05; Reject Null Hypothesis 
+
+Q.7 IWD Coding Challenge? 
+In how many ways can we replace a string ex. ?2 where ? can be replaced with 0-9 such that the numbers it should not be equal to number preceding it and number 
+following it? 
+
+
+
+
+
