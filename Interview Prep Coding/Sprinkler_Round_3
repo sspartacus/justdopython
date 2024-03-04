@@ -9,3 +9,4 @@ If a filter is used on the partitioned column, it only matches the filter value 
 Q.5 How do you deal with the null/ duplicate values in Excel? 
 Q.6 Product Category and Revenue? Tell me a SQL query to get the total Revenue for each Category. 
 Also, tell me the same way for doing it in Excel. 
+Q.7 Explain VLOOKUP and XLOOKUP? 
