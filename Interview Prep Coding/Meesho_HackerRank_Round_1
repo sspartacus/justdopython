@@ -1,0 +1,10 @@
+Q.1 Write a query in the below format? 
+Sales: record_date,  revenue
+
+Results
+Month Monthly_sales Cumulative_sales Perecnt Incerase  
+2       10000           10000            
+3        5000           15000         5000/10000= 50%
+4        6000           21000         6000/15000= 40% 
+5
+6
