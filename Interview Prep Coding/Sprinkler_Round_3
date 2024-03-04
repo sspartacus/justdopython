@@ -1,5 +1,6 @@
 Q.1 What is Data Validation in Excel? 
 Q.2 How would you Aggregate data in Excel without using UNIQUE and VLOOKUP? 
+Pivot tables
 Q.3 Tell me about a project that you are proud of? 
 Q.4 What is the meaning of Partitioning tables? 
 A very large table is divided into smaller partition to improve the query performance and controlling costs by reducing the number of bytes read by a query. 
@@ -10,3 +11,4 @@ Q.5 How do you deal with the null/ duplicate values in Excel?
 Q.6 Product Category and Revenue? Tell me a SQL query to get the total Revenue for each Category. 
 Also, tell me the same way for doing it in Excel. 
 Q.7 Explain VLOOKUP and XLOOKUP? 
+
