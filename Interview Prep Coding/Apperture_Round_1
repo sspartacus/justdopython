@@ -21,16 +21,19 @@ Timestamp                      user_id
 2022-01-01  09:06:55           101
 2022-01-01  09:07:16           101
 2022-01-01  09:07:20           102
+2022-01-03  11:07:20           102 
+2022-01-04  10:07:20           101
 
 On how many weekdays did each user login on the app. (assume that a function is_weekday() is already created for your ease, to which you can pass a string and it gives you weather it is a weekday )
+
 import pandas as pd 
+from datetime import datetime
+df = pd.DataFrame({'timestamp': ['2022-01-01  09:06:55', '2022-01-01  09:07:16', '2022-01-01  09:07:20', '2022-01-03  11:07:20', '2022-01-04  10:07:20'], 'user_id': [101,101,102,102,101]})
+def is_weekday(timestamp_str):
+    timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
+    return timestamp.weekday() < 5
 
-df['Timestamp'] = df['Timestamp'].to_dtype(str)  
-df['t_or_f'] = is_weekday(df['Timestamp'])
-df.apply( df['Timestamp'], lambda x: )
+df['weekday'] = df['timestamp'].apply(lambda x: is_weekday(str(x)))
+week_day_count = df[df['weekday']].groupby(by = ['user_id']).size().reset_index(name  = 'WD_count')
 
-df_2 = pd.DataFrame({is_weekday(df['Timestamp']: 't_or_f', 
-df['user_id']: 'user_id'}))
 
-df_2.groupby(df_2['user_id']).aggregate().sum()
-df_2
