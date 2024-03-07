@@ -1,0 +1,23 @@
+Q.21 CASTING IN Python? 
+y = int(2.8) #y will be 2
+x = float(1) #x will be 1.0
+z = str(3.0) #z will be '3.0'
+
+Q.22 STRINGS IN Python? 
+Use 3 double quotes to assign multiline string to a variable. 
+a = """Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
+sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua."""
+
+NOTE: String in Python are treated as arrays of bytes representing unicode characters
+E.G  a = "Hello, World!"
+print(a[1])
+
+To check if a string is present in another string, we can use IN
+txt = "The best things in life are free!"
+if "free" in txt:
+  print("Yes, 'free' is present.")
+
+Q.23 
+
