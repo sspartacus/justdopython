@@ -4,20 +4,54 @@ x = float(1) #x will be 1.0
 z = str(3.0) #z will be '3.0'
 
 Q.22 STRINGS IN Python? 
-Use 3 double quotes to assign multiline string to a variable. 
-a = """Lorem ipsum dolor sit amet,
-consectetur adipiscing elit,
-sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua."""
-
 NOTE: String in Python are treated as arrays of bytes representing unicode characters
 E.G  a = "Hello, World!"
 print(a[1])
 
+IN in Strings 
 To check if a string is present in another string, we can use IN
 txt = "The best things in life are free!"
 if "free" in txt:
   print("Yes, 'free' is present.")
 
-Q.23 
+NEGATIVE INDEXING 
+NOTE: Indexing exclude the last character
+b = "Hello, World!"
+print(b[-5:-2])
 
+MODIFYING STRINGS 
+a = "Hello, World!"
+a.upper() E.g 
+a.lower() E.g 
+a.strip() E.g print(a.strip())
+a.replace() E.g print(a.replace("H", "J"))
+a.split() E.g print(a.split(",")) # returns ['Hello', ' World!']
+
+CONCATENATE STRING
+E.g a = "Hello"
+b = "World"
+c = a + " " + b
+print(c)
+
+FORMATTING STRINGS
+The format() method takes the passed arguments, formats them, and places them in the string where the placeholders {} are. 
+E.g myorder = "I want {} pieces of item {} for {} dollars."
+print(myorder.format(3, 567, 49.95))
+
+ESCAPE CHARACTERS
+To insert characters that are illegal in a string, use an escape character.
+txt = "We are the so-called \"Vikings\" from the north."
+
+STRING METHODS
+capitalize(): Converts the first character to upper case
+count(): Returns the number of times a specified value occurs in a string
+find()/index(): Searches the string for a specified value and returns the position of where it was found
+isalnum(): Returns True if all characters in the string are alphanumeric
+isalpha()	Returns True if all characters in the string are in the alphabet
+isdigit()	Returns True if all characters in the string are digits
+islower()	Returns True if all characters in the string are lower case
+join()	Joins the elements of an iterable to the end of the string
+split()	Splits the string at the specified separator, and returns a list
+translate() returns a string where some specified characters are replaced with the character described in a dictionary
+
+Q.23 PYTHON 
