@@ -57,5 +57,9 @@ translate() returns a string where some specified characters are replaced with t
 Q.23 PYTHON TUPLES? 
 Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
 A tuple can contain different data types
+E.g thistuple = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
+print(thistuple[:4])
+
+Q.24 
 
 
