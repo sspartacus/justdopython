@@ -54,4 +54,8 @@ join()	Joins the elements of an iterable to the end of the string
 split()	Splits the string at the specified separator, and returns a list
 translate() returns a string where some specified characters are replaced with the character described in a dictionary
 
-Q.23 PYTHON 
+Q.23 PYTHON TUPLES? 
+Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
+A tuple can contain different data types
+
+
