@@ -57,9 +57,84 @@ translate() returns a string where some specified characters are replaced with t
 Q.23 PYTHON TUPLES? 
 Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
 A tuple can contain different data types
+
+ACCESS TUPLES
 E.g thistuple = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
 print(thistuple[:4])
 
-Q.24 
+UPDATE TUPLES
+x = ("apple", "banana", "cherry")
+y = list(x)
+y[1] = "kiwi"
+x = tuple(y)
+
+UNPACKING TUPLES: 
+We are also allowed to extract the values back into variables. This is called "unpacking". 
+E.g fruits = ("apple", "banana", "cherry", "strawberry", "raspberry")
+(green, yellow, *red) = fruits
+
+LOOP TUPLES: 
+E.g thistuple = ("apple", "banana", "cherry")
+for i in range(len(thistuple)):
+  print(thistuple[i])
+
+JOIN TUPLES: 
+E.g tuple1 = ("a", "b" , "c")
+tuple2 = (1, 2, 3)
+tuple3 = tuple1 + tuple2
+print(tuple3)
+
+TUPLE METHODS: 
+count() and index() can be used on tuples 
+
+Q.23 PYTHON OPERATORS? 
+PRECEDENCE ORDER 
+()	Parentheses	
+**	Exponentiation	
++x  -x  ~x	Unary plus, unary minus, and bitwise NOT	
+*  /  //  %	Multiplication, division, floor division, and modulus	
++  -	Addition and subtraction	
+<<  >>	Bitwise left and right shifts	
+&	Bitwise AND	
+^	Bitwise XOR	
+|	Bitwise OR	
+==  !=  >  >=  <  <=  is  is not  in  not in 	Comparisons, identity, and membership operators	
+not	Logical NOT	
+and	AND	
+or	OR
+NOTE: If two operators have the same precedence, the expression is evaluated from left to right.
+
+Q.24 PYTHON BOOLEANS? 
+Almost any value is evaluated to True if it has some sort of content.
+Except Below Values: 
+bool(False)
+bool(None)
+bool(0)
+bool("")
+bool(())
+bool([])
+bool({})
+
+ININSTANCE(): It returns bool values based on if the integer is of data type or not. 
+x = 200
+print(isinstance(x, int))
+
+Q.25 PYTHON NUMBERS? 
+import random
+print(random.randrange(1, 10))
+
+Q.26 PYTHON DATA TYPES? 
+Example	                            Data Type
+x = {"apple", "banana", "cherry"}	  set
+x = range(6)	                      range
+x = "Hello World"                  	str
+x = {"name" : "John", "age" : 36}	  dict
+x = ["apple", "banana", "cherry"]	list
+x = ("apple", "banana", "cherry")	tuple
+x = True	                        bool
+x = None	                        NoneType
+
+
+
 
 
