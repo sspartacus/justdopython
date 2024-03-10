@@ -158,6 +158,75 @@ print("Python is " + x)
 PYTHON INDENTATION: 
 RULES: 
 The number of spaces is up to you as a programmer, the most common use is four, but it has to be at least one.
-You have to use the same number of spaces in the same block of code. 
+You have to use the same number of spaces in the same block of code.
 
+Q.28 PYTHON DICTIONARIES? 
+Dictionary items are ordered, changeable, and do not allow duplicates.
+e.g thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict["brand"])
 
+ACCESS ITEMS: 
+We can access values using get method as well
+x = thisdict.get("model")
+
+x = thisdict.keys()
+The keys() method will return a list of all the keys in the dictionary.
+
+x = thisdict.values()
+The values() method will return a list of all the values in the dictionary.
+
+x = thisdict.items()
+The items() method will return each item in a dictionary, as tuples in a list.
+
+NOTE: The list of the values/keys/items is a view of the dictionary, meaning that any changes done to the dictionary will be reflected in the keys/values/items list
+
+CHANGE ITEMS: 
+1) By assigning the value to key 
+thisdict["year"] = 2018
+
+2) Using Update Method: 
+The update() method will update the dictionary with the items from the given argument.
+E.G thisdict.update({"year": 2020})
+
+ADDING ITEMS: 
+1) By using a new index key and assigning a value to it 
+thisdict["color"] = "red"
+
+2) Using Update Method: 
+If the item does not exist, the item will be added. 
+E.G thisdict.update({"color": "red"})
+
+REMOVE ITEMS: 
+1) POP() METHOD
+The pop() method removes the item with the specified key name
+thisdict.pop("model")
+print(thisdict)
+
+2) DEL keyword: 
+The del keyword removes the item with the specified key name:
+del thisdict["model"]
+
+3) Clear() method: 
+It empties the entire dictionary 
+thisdict.clear()
+
+LOOPING THROUGH DICT: 
+for x in thisdict:
+  print(thisdict[x])
+
+for x, y in thisdict.items():
+  print(x, y)
+
+COPYING A DICT: 
+You cannot copy a dictionary simply by typing dict2 = dict1, 
+since changes made in dict1 will automatically also be made in dict2.
+e.G mydict = thisdict.copy()
+
+NESTED DICTIONARIES: 
+myfamily["child2"]["name"]
+
+DICT METHODS: 
