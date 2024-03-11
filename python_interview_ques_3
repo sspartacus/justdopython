@@ -228,3 +228,5 @@ e.G mydict = thisdict.copy()
 
 NESTED DICTIONARIES: 
 myfamily["child2"]["name"]
+
+29) 
