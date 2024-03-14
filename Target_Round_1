@@ -1,0 +1,9 @@
+Q.1 Replace the digits in the string with #
+consider a string that will have digits in that, we need to remove all the not digits and replace the digits with #? 
+import re
+string = '#a$#b%c%1#'
+result = re.sub(r'\D', '', string)
+final = re.sub(r'\d', '#', result)
+print(final)
+
+Q.2 
