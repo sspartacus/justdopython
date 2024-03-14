@@ -229,4 +229,16 @@ e.G mydict = thisdict.copy()
 NESTED DICTIONARIES: 
 myfamily["child2"]["name"]
 
-29) 
+29) FILTER PYTHON? 
+ages = [5, 12, 17, 18, 24, 32]
+
+def myFunc(x):
+  if x < 18:
+    return False
+  else:
+    return True
+result = filter(myFunc, ages)
+arr = []
+for x in result: 
+  arr.append(x)
+print(arr)
