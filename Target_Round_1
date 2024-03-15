@@ -6,4 +6,141 @@ result = re.sub(r'\D', '', string)
 final = re.sub(r'\d', '#', result)
 print(final)
 
-Q.2 
+Q.2 Students marks dashboard
+consider the marks list of class students given two lists
+Students = ['student1','student2','student3','student4','student5','student6','student7','student8','student9','student10']
+Marks = [45, 78, 12, 14, 48, 43, 45, 98, 22, 80]
+from the above two lists the Student[0] got Marks[0], Student[1] got Marks[1] and so your task is to print the name of students 
+
+a. Who got top 5 ranks, in the descending order of marks
+b. Who got least 5 ranks, in the increasing order of marks
+d. Who got marks between >25th percentile <75th percentile, in the increasing order of marks
+
+Sol. import numpy as np
+dictionary = dict(zip(Students, Marks))
+sorted_dict = sorted(dictionary.items(), key =lambda x:x[1])
+
+for (student, marks) in sorted_dict[::-1][:5]:
+  print(f'{student}: {marks}')
+
+for (student, marks) in sorted_dict[:5]:
+  print(f'{student}: {marks}')
+
+marks_arr = np.array(Marks)
+percentile_25 = np.percentile(marks_arr, 25)
+percentile_75 = np.percentile(marks_arr, 75)
+for (student, marks) in sorted_dict:
+  if marks > percentile_25 and marks < percentile_75:
+    print(f'{student}: {marks}')
+
+Q.3  How to calculate standard deviation of values?
+list = [1,2,3,4,10,19,20,22]
+Sol. import statistics
+result = statistics.stdev(list)
+print(result)
+
+Q.4 How to remove duplicate values by a given Subject and keep the last record for each subject?
+data = {'Subject': ['Mathematics', 'English', 'Physics', 'Mathematics', 'Physics'],
+   'Marks': [79, 56, 91,99,45] }
+df = pd.DataFrame(data)
+Sol. df_sorted = df.sort_values(by = 'Subject')
+df3= df_sorted.drop_duplicates(subset= 'Subject', keep='last')
+
+Q.5 How to find out cumulative summation of values for each row?
+values = [3, 4, 10, 7, 2, 0]
+Sol. import numpy as np
+array = np.cumsum(values)
+print(array)
+
+Q.6	Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+•	Equilateral: It's a triangle with sides of equal length.
+•	Isosceles: It's a triangle with sides of equal length.
+•	Scalene: It's a triangle with sides of differing lengths.
+•	Not A Triangle: The given values of A, B, and C don't form a triangle.
+Sol. Select CASE   WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle'
+        WHEN A = B AND B = C THEN 'Equilateral'
+        WHEN A = B OR A = C OR B = C THEN 'Isosceles'
+        ELSE 'Scalene' end as type
+     From Triangles 
+
+Q.7 You have data of people who have applied for a lottery ticket. The data consists of their ticket number. 
+You have to choose winners by selecting the people present in rows divided by 3 or 7, but not both.
+Sol. Select ticket_number
+From ( 
+Select  ticket_number, row_number() over(order by ticket_number) as row
+From table 
+) tt 
+Where ( row%3 = 0 or row%7 = 0) and (row%21 <> 0 )
+
+Q.8 There are two tables:
+Table Dogs
+ id INTEGER NOT NULL PRIMARY KEY,
+ name VARCHAR(50) NOT NULL
+ Table Cats
+ id INTEGER NOT NULL PRIMARY KEY,
+ name VARCHAR(50) NOT NULL
+Write a query that selects all distinct pet names
+Sol. Select name
+From Dogs 
+Union 
+Select name 
+From Cats 
+
+Q.9 Given the 2 tables:
+Table_Class (
+Class_Id int
+,Class_desc string
+) Table_Attendance (
+Class_id string
+,Student_id int
+,Class_Date datetime
+) What would the result be of executing the given SQL?
+Select * from Table_Class as a inner join Table_Attendance as b  on a.Class_id=b.Class_id
+Sol. This will throw Sql run time error since the data type of Class_id are different from both the tables. 
+One is int and the other is string type. We need to cast one of the two in order to get results
+
+Q.10 There are two tables, Table 1 has two columns A & B , and Table 2 has two columns C & D, there is no common join key, how can I get the 4 columns together beside each other?
+Sol. SELECT A, B, NULL AS C, NULL AS D
+FROM Table1
+UNION ALL
+SELECT NULL AS A, NULL AS B, C, D
+FROM Table2;
+
+Q.11 The table given below has 2 columns, item | sales, there are say 20 distinct items, how will we get the % sales contribution of each of the items?
+Sol. WITH total_sales as ( 
+Select sum(sales) as t_sales
+From table
+) 
+Select item, 100.0*sales/t_sales as percent_contribution
+From tables 
+Join  total_sales on 1=1 
+
+Q.12 1.	A table is given to you which has 3 columns, item -region – sales (21 rows - 7 items), there are three distinct Regions, Region 1, Region 2 and Region 3 in the table, 
+how can we get sales for each item across region (Each region in a column) ? What will be the resulting number of rows after this?
+Sol. SELECT 
+    item,
+    SUM(CASE WHEN region = 'Region 1' THEN sales ELSE 0 END) AS Region_1_Sales,
+    SUM(CASE WHEN region = 'Region 2' THEN sales ELSE 0 END) AS Region_2_Sales,
+    SUM(CASE WHEN region = 'Region 3' THEN sales ELSE 0 END) AS Region_3_Sales
+FROM 
+    Table
+GROUP BY 
+    Item 
+The resulting rows would be 7 since there are 7 distinct items.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
