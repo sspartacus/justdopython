@@ -1,0 +1,156 @@
+Q.1 How many distinct companies that signed up in a particular week took action in subsequent weeks?
+Sol. select date_format(signup_week,  '%Y-%m-%d') as signup_week, activity_week, count(distinct company_id) as total_comp
+from (
+select tt.*, ceil(datediff(action_date, signup_week)/7) as activity_week
+from ( 
+select  a.*, c.id as comp_id, c.company_code, c.signup_date, 
+-- ceil(datediff(action_date, signup_date)/7) as activity_week
+DATE_SUB(signup_date, INTERVAL DAYOFWEEK(signup_date) - 2 DAY) as signup_week
+from Company as c
+right join Activity as a on c.id = a.company_id
+) tt 
+) tt
+group by  signup_week, activity_week 
+
+Q.2 How many actions - PO/OC/Invoice/Inventory did each company take? 
+Sol. select company_code, date_format(signup_date,  '%Y-%m-%d') as  signup_date, count(case when action_name = 'PO' then id end) as po_count, 
+ count(case when action_name = 'OC' then id end) as oc_count, 
+  count(case when action_name = 'Invoice' then id end) as invoice_count, 
+   count(case when action_name = 'Inventory' then id end) as inventory_count 
+from ( 
+select  a.*, c.id as comp_id, c.company_code, c.signup_date 
+-- ceil(datediff(action_date, signup_date)/7) as activity_week
+-- DATE_SUB(signup_date, INTERVAL DAYOFWEEK(signup_date) - 2 DAY) as signup_week
+from Company as c
+right join Activity as a on c.id = a.company_id
+) tt
+group by company_code, signup_date 
+order by company_code, signup_date 
+
+Q.3 Write Mysql query to find out which company(s) has created the maximum PO/OC/Invoice/Inventory. 
+If multiple companies have taken same number of action, show the list of companies in comma separated format? 
+Sol. select action_name, company_code_agg, total_actions as action_count
+from ( 
+select action_name, total_actions, group_concat(company_code) as company_code_agg
+from( 
+select action_name, company_code, total_actions
+from ( 
+select action_name, company_code, total_actions, rank() over(partition by action_name order by total_actions desc) as rnk
+from ( 
+select company_code, action_name, 
+count(id) as total_actions
+from ( 
+select  a.*, c.id as comp_id, c.company_code, c.signup_date 
+-- ceil(datediff(action_date, signup_date)/7) as activity_week
+-- DATE_SUB(signup_date, INTERVAL DAYOFWEEK(signup_date) - 2 DAY) as signup_week
+from Company as c
+right join Activity as a on c.id = a.company_id
+) tt
+group by company_code, action_name  
+-- order by company_code, action_name 
+) tt 
+) tt 
+where rnk =1 
+) tt 
+group by action_name, total_actions
+) tt 
+
+Q.4 Create a table to list unique companies, number of employees, names of employees (comma separated), number of unique items bought? 
+Sol. import pandas as pd
+df = pd.DataFrame({'company': ['Google', 
+'Google', 
+'Apple',
+'Google',
+'Facebook',
+'Apple',
+'Google',
+'Netflix',
+'Facebook',
+'Netflix',
+'Netflix',
+'Apple',
+'Facebook',
+'Apple',
+'Netflix',
+'Netflix',
+'Facebook',
+'Google',
+'Google',
+'Netflix',
+'Facebook',
+'Facebook',
+'Apple'
+], 'name': ['Josh',
+'John',
+'Kathy',
+'Karen',
+'Peter',
+'Kathy',
+'Karen',
+'Rita',
+'Stacy',
+'Rita',
+'Rita',
+'George',
+'Peter',
+'Matt',
+'Keith',
+'Rita',
+'Stacy',
+'Karen',
+'John',
+'Keith',
+'Stacy',
+'Peter',
+'Matt'], 'item': ['TV',
+'TV',
+'Mobile',
+'Laptop',
+'Laptop',
+'Headphone',
+'Laptop',
+'TV',
+'Headphone',
+'Laptop',
+'Headphone',
+'Mobile',
+'Laptop',
+'Mobile',
+'Headphone',
+'TV',
+'Mobile',
+'TV',
+'TV',
+'Headphone',
+'TV',
+'Headphone',
+'Laptop']} )
+
+df2 = pd.DataFrame(df.groupby(by='company').aggregate( 'name').nunique()) 
+df2 = df2.rename(columns= {'name': 'employee_count'})
+df3 = pd.DataFrame(df.groupby(by='company').aggregate( 'item').nunique())
+df3 = df3.rename(columns= {'item': 'item_count'})
+df2['unique_items'] = df3['item_count']
+df4 = pd.DataFrame(df.drop_duplicates(subset=['company', 'name']).groupby('company')['name'].apply(lambda x: ', '.join(x)))
+df4 = df4.rename(columns= {'name': 'name_employees'})
+df2['name_employees'] = df4['name_employees']
+cols = ['employee_count', 'name_employees', 'unique_items']
+df2 = df2[cols]
+df2
+
+Q.5 Find employee in a companies who have purchased the same item more than once. Eg John from Google purchased TV twice? 
+Sol. df5 = df.groupby(by=['company', 'name', 'item']).size().reset_index(name='item_count')
+df5 = df5[df5['item_count'] > 1]
+df5 = df5.reset_index(drop= True)
+df5
+
+Q.6 Write function in cell C14 which fetches the subject score of a student from above table based on selected student and subject? 
+Sol. =index($C$5:$E$9,  match(B14, $B$5:$B$9, 0), match(C14, $C$4:$E$4, 0)) 
+
+Q.7 Prepare Grade Table based on the score above. A formula needs to be written in Cell B25 which can be dragged to fill the entire table.
+Sol. =IFS(C5 > 90, "A", AND(C5 >= 70, C5 <= 90), "B", C5 < 70, "C")
+
+Q.8 Use the formula vlookup to find score of a student in the three subjects. A formula needs to be written in Cell B34 which can be dragged across?
+Sol. =VLOOKUP($B$34, $B$5:$E$9, 2, 0)
+
+
