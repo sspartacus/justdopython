@@ -1,0 +1,28 @@
+Q.1 Given a list. arr = [3,4,5,2,6]. Give me all pairs of elements that sum equals 7
+arr = [3,4,5,2,6]
+
+def pair(arr): 
+  brr = []
+  
+  for i in range(0, len(arr)): 
+    for j in range(i+1, len(arr)): 
+      if arr[i]+ arr[j] == 7: 
+        brr.append((arr[i], arr[j]))
+  print(brr)
+
+pair(arr) 
+
+Q.2 
+select s.name, m.subject, m.marks
+from ( 
+select s.name, m.subject, m.marks, rank() over(partition by m.name order by m.marks desc) as rnk
+from Marks as m 
+left join Student as s  on S.Id = m.student_id
+) tt
+where rnk = 1 
+
+Q.3 
+select s.name, sum(marks) 
+from Marks as m 
+left join Student as s  on S.Id = m.student_id
+group by s.name
