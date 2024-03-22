@@ -5,7 +5,7 @@ Set is a collection which is unordered, unchangeable*, and unindexed. No duplica
 Dictionary is a collection which is ordered** and changeable. No duplicate members.
 
 Q.12 a) Is it possible to add and remove items from sets? 
-Yes, you can modified values in sets but you can surely add and remove values from sets. 
+Yes, you cannot modified values in sets but you can surely add and remove values from sets. 
 
 b) Access Sets
 Sets cannot be accessed by using index or key, they can be accessed by using for loop 
