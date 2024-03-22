@@ -1,0 +1,18 @@
+Q.1 Update department table with 10 increment in salary? 
+UPDATE Department as
+SET salary = 1.1* salary 
+
+Q.2 Python program to find out values in b and not in a ? 
+a = [1,2,3]
+b = [3,4,5] 
+result = [i for i in b if i not in a] 
+result 
+
+Q.3 What is the difference between union and join? 
+Q.4 Sum sales over class, division, department?
+Sum(sales) over(partition by class)
+Q.5 What is the difference between row_number, rank and dense_rank()? 
+Q.6 What is clusetered index/
+Q.7 Can the two libraries seaborn and matplotlib interact each other? 
+Q.8 What are different chart types that you have used? 
+Q.9 You want to sum salaries for department wise? table: Depart_id, name, emp_id, salary
