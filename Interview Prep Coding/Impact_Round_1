@@ -18,6 +18,17 @@ or
 result = df.fillna(0)
 
 Q.5 What is the difference between loc and iloc? 
-
+loc uses label based indexing whereas iloc use position based indexing
 df.loc[df[transaction_id] = 'txn10002', quantity_sold]
 df.iloc[-3:6]
+
+Q.6 How will you remove duplicate rows in table?
+where count(*) > 1
+
+Q.7 What is difference between primary key and unique keys in a table? 
+
+Q.8 Write a query to get total quantity sold and total sales? 
+select transaction_date, sum(quantity_sold) as total_sold, 
+sum(final_price*quantity_sold) as total_revenue
+from cte 
+group by transaction_date
