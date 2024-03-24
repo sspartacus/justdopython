@@ -1,0 +1,23 @@
+Q.1 What is the difference between dense_rank, rank and row_number? 
+Q.2 Write a python query to join two tables? 
+result = table1.merge(table_2,  how = 'left', on = 'id' ) 
+cols = ['cst_name', 'cst_age', 'cst_credit_score']
+result[cols]
+
+Q.3 Write a python query to get average cst credit score and count the people with their age? 
+age_count = df.groupby(by= 'age').size().reset_index(name = 'age_count', drop= True)
+age_average = df.groupby(by= 'age').aggregate('cst_credit_score').mean()
+result = df1.merge( df2, how = 'left, on = 'age') 
+cols = ['age', 'age_count', 'age_average']
+result[cols]
+
+Q.4 Replaces null values in a dataframe with 0 ? 
+result = df.isna()
+result['column'] = 0 
+or 
+result = df.fillna(0)
+
+Q.5 What is the difference between loc and iloc? 
+
+df.loc[df[transaction_id] = 'txn10002', quantity_sold]
+df.iloc[-3:6]
