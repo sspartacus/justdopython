@@ -1,5 +1,8 @@
 Q.1 You are looking to forecast sales data and you have some anomalies in data due to covid? 
 What are the steps you will take to forecast it? 
+1) Data Exploration and Preprocessing: Remove significant drops or spikes in sales during and post covid respectively. 
+2) Data Cleaning 
+3) Perform Time series analysis/EDA on the cleaned data to understand its underlying patterns, seasonality, and trends.
 
 Q.2 Sam has 3000 bananas. He takes them to market 1000 km away on his only camel. The camel can only carry 1000 bananas at a time. The camel eats 1 banana for every 1 km it travels. 
 What is the maximum number of bananas that Sam can take to the market?
