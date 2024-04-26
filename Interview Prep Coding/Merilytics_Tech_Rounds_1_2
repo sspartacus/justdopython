@@ -3,26 +3,27 @@ Round 1
 2) Select only those Departments which have more than 2 employees 
 3) Select only those Employees whose name start with a
 4) Write a Python code to get the 3rd Repititive Character from a string: 
-3rd non repitive letter 
 aabbc
+string = 'Hippopotamus' 
+dic = {}
 
-def func(string): 
+for i in string: 
+  if i in dic: 
+    dic[i] += 1 
+  else: 
+    dic[i] = 1 
 
-   s = input()
-   dict = {}
+count = 0 
+for i in dic.keys(): 
+  if dic[i] > 1: 
+    count += 1
 
-   count = 0
+    if count == 3: 
+      print(i)
+      pass
 
-   for i in s.split():
-      dict[i] += 1
-
-
-    for k,v in dict.items(): 
-        if v == 1: 
-           count += 1 
-        
-        if count == 3: 
-             return k 
+if count < 3: 
+  print('No 3rd Repititive character')
 
 Round 2 
 5) Write a Query to output all the duplicate entries in a table? 
