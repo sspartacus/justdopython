@@ -23,7 +23,33 @@ df.loc[df[transaction_id] = 'txn10002', quantity_sold]
 df.iloc[-3:6]
 
 Q.6 How will you remove duplicate rows in table?
-where count(*) > 1
+1) USING ROW_NUMBER/RANK Function
+WITH CTE([FirstName], 
+    [LastName], 
+    [Country], 
+    DuplicateCount)
+AS (SELECT [FirstName], 
+           [LastName], 
+           [Country], 
+           ROW_NUMBER() OVER(PARTITION BY [FirstName], 
+                                          [LastName], 
+                                          [Country]
+           ORDER BY ID) AS DuplicateCount
+    FROM [SampleDB].[dbo].[Employee])
+DELETE FROM CTE
+WHERE DuplicateCount > 1;
+
+2) USING GROUP BY AND MAX CLAUSE: 
+DELETE FROM [SampleDB].[dbo].[Employee]
+    WHERE ID NOT IN
+    (
+        SELECT MAX(ID) AS MaxRecordID
+        FROM [SampleDB].[dbo].[Employee]
+        GROUP BY [FirstName], 
+                 [LastName], 
+                 [Country]
+    );
+
 
 Q.7 What is difference between primary key and unique keys in a table? 
 
