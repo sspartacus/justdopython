@@ -46,6 +46,10 @@ plt.show()
 Q.8 What are different chart types that you have used? 
 Q.9 You want to sum salaries for department wise? table: Depart_id, name, emp_id, salary
 Q.10 What is the difference between HSQL and normal SQL? 
+Hive is better for analyzing complex data sets. SQL is better for analyzing less complicated data sets very quickly. 
+Hive doesn't support OLTP. SQL supports Online Transactional Processing (OLTP).
+Hive is a data warehouse project built on top of Hadoop that uses HSQL mostily for BigData where SQL is a common programming language not used for BigData. 
+Hive queries can have high latency because Hive runs batch processing via Hadoop whereas SQL queries has low latency for less data. 
 
 
 
