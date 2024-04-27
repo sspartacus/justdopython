@@ -19,6 +19,15 @@ Q.4 Sum sales over class, division, department?
 Sum(sales) over(partition by class)
 Q.5 What is the difference between row_number, rank and dense_rank()? 
 Q.6 What is clusetered index? 
+Clustered Index: 
+It sort and store the data rows in the table or view based on their key values.
+These key values are the columns included in the index definition
+There can be only one clustered index per table
+
+Non-Clustered Index: 
+Nonclustered indexes have a structure separate from the data rows. 
+It contains the key values and each key value entry has a pointer to the data row that contains the key value.
+
 Q.7 Can the two libraries seaborn and matplotlib interact each other? 
 Q.8 What are different chart types that you have used? 
 Q.9 You want to sum salaries for department wise? table: Depart_id, name, emp_id, salary
