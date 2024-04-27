@@ -29,6 +29,20 @@ Nonclustered indexes have a structure separate from the data rows.
 It contains the key values and each key value entry has a pointer to the data row that contains the key value.
 
 Q.7 Can the two libraries seaborn and matplotlib interact each other? 
+Seaborn is built on top of matplotlib and utilizes matplotlib for creating plots
+E.g Create a plot using seaborn's functions and then customize it further using matplotlib's extensive customization options.
+tips = sns.load_dataset("tips")
+sns.scatterplot(data=tips, x="total_bill", y="tip", hue="sex")
+
+# Customize the plot using matplotlib
+plt.title("Scatter Plot of Total Bill vs. Tip")
+plt.xlabel("Total Bill")
+plt.ylabel("Tip")
+plt.legend(title="Sex")
+
+# Show the plot
+plt.show()
+
 Q.8 What are different chart types that you have used? 
 Q.9 You want to sum salaries for department wise? table: Depart_id, name, emp_id, salary
 Q.10 What is the difference between HSQL and normal SQL? 
