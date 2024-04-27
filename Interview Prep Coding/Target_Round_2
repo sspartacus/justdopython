@@ -9,6 +9,12 @@ result = [i for i in b if i not in a]
 result 
 
 Q.3 What is the difference between union and join? 
+1) JOIN combines rows horizontally while UNION combines rows vertically
+2) JOIN retains duplicate rows while UNION removes duplicate rows
+3) JOIN maintains referential integrity between related tables, while UNION does not as it combines unrelated data.
+4) JOIN is generally faster while UNION is generally slower as it involves separate queries
+5) JOIN combine rows from multiple tables based on a related column while UNION combines the result sets of two or more SELECT statements
+
 Q.4 Sum sales over class, division, department?
 Sum(sales) over(partition by class)
 Q.5 What is the difference between row_number, rank and dense_rank()? 
@@ -17,3 +23,6 @@ Q.7 Can the two libraries seaborn and matplotlib interact each other?
 Q.8 What are different chart types that you have used? 
 Q.9 You want to sum salaries for department wise? table: Depart_id, name, emp_id, salary
 Q.10 What is the difference between HSQL and normal SQL? 
+
+
+
