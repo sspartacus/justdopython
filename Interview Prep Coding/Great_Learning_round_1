@@ -25,4 +25,5 @@ Q.8) What would you identify outliers in a dataset?
 NOTE: The data should have normal distribution
 3) Interquartile-Range
 Q.9) What is Conditional probability? 
-
+The chances that some outcome (A) occurs given that another event (B) has also occurred.
+P(B∣A)=P(A∩B)/P(A)
