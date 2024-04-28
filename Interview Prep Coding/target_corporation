@@ -14,7 +14,7 @@ a) Output all the transactions happened and the total amount of revenue received
 b) Bucket the products into total_sales categories. 
 c) List all the product where their total sales is greater than their groups average total sales? 
 
-select Product id, sum(sales_price*units) as total_sales, 
+b) select Product id, sum(sales_price*units) as total_sales, 
 case when sum(sales_price*units)  < 100 then 'below_100'
 when sum(sales_price*units) between 100 and 1000 then 'between_100_and_1000'
 when sum(sales_price*units) between 1000 and 2000 then 'between_1000_and_2000'
@@ -22,13 +22,10 @@ else 'above_2000' end as buckets
 
 from Transactions as t 
 join product as p on t.Product_id = p.Product_id
-where extract ('year' from order_date) = 2023 and units > 0 
+where extract ('year' from order_date) = 2023 
 group by 1 
 
-
-select Product_id 
-from Transactions as t 
-(
+c) with group_average as ( 
 select case when sum(sales_price*units)  < 100 then 'below_100'
 when sum(sales_price*units) between 100 and 1000 then 'between_100_and_1000'
 when sum(sales_price*units) between 1000 and 2000 then 'between_1000_and_2000'
@@ -36,10 +33,21 @@ else 'above_2000' end as buckets,
 avg(sales_price*units) as avg_total_sales 
 
 from Transactions as t 
-where extract ('year' from order_date) = 2023 and units > 0 
+where extract ('year' from order_date) = 2023 
 group by 1 
-) tt 
-where extract ('year' from order_date) = 2023 and units > 0 
-group by 1 
-having sum(sales_price*units) > avg_total_sales
+), 
+total_sales as ( 
+select Product_id, sum(sales_price*units) as total_sales, 
+case when sum(sales_price*units)  < 100 then 'below_100'
+when sum(sales_price*units) between 100 and 1000 then 'between_100_and_1000'
+when sum(sales_price*units) between 1000 and 2000 then 'between_1000_and_2000'
+else 'above_2000' end as buckets
 
+from Transactions as t 
+where extract ('year' from order_date) = 2023
+group by 1 
+) 
+select Product_id
+from total_sales
+join group_average on group_average.buckets = total_sales.buckets
+where total_sales > avg_total_sales
