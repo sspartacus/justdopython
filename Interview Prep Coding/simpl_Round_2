@@ -2,6 +2,12 @@ Q.1 What is the difference between UNION and UNION ALL?
 Q.2 If Table 1 contains values and Table 2 contains values? What will be the output of A LEFT JOIN B, A INNER JOIN B, A CROSS JOIN B? 
 Q.3 We have table A user_id, month, salary. Pick up the latest months salary for all users? 
 Q.4 What will be the output of TABLE1 UNION TABLE2 UNION TABLE3? Write it in another format? 
+select isnull(a.id,b.id) as id, 
+    a.Text1,isnull(a.ParentId,b.ParentId) parentid,
+    isnull(a.Number,b.Number) numm,TOid 
+ from @t a 
+ full join @t1 b on a.Id=b.Id and a.ParentId=b.ParentId
+
 Q.5 If Netflix have a recommendation  product, what are the metrics that you should be tracking for acheiveing the success of the product? 
 Q.6 Write a python code to using the group by function on date to get the sum of amount? 
 Q.7 What is the difference between DENSE_RANK and RANK function? 
