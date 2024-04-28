@@ -20,5 +20,9 @@ type(arr)
 Q.6 What would you identify Null Values in a dataset? And how do you deal with those? 
 Q.7) If the data is having Male and Female then how would you do the imputation and how if the data is numerical? 
 Q.8) What would you identify outliers in a dataset? 
+1) Box-Plot Method 
+2) Z-Score Method
+NOTE: The data should have normal distribution
+3) Interquartile-Range
 Q.9) What is Conditional probability? 
 
