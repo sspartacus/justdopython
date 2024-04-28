@@ -52,6 +52,15 @@ DELETE FROM [SampleDB].[dbo].[Employee]
 
 
 Q.7 What is difference between primary key and unique keys in a table? 
+Primary key: A key that uniquely identifies each record in a table but cannot store NULL values
+There can be only one Primary key in a table
+It can generate a clustered index 
+It cannot generate a Non-clustered index
+
+Unique key: Prevents duplicate values in a column but can store NULL values
+There can be more than one unique keys in a table
+It cannot generate a clustered index
+It can generate a Non-clustered index
 
 Q.8 Write a query to get total quantity sold and total sales? 
 select transaction_date, sum(quantity_sold) as total_sold, 
