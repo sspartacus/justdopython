@@ -12,7 +12,7 @@ def pair(arr):
 
 pair(arr) 
 
-Q.2 
+Q.2 Determine each Student Highest marked subject and its marks? 
 select s.name, m.subject, m.marks
 from ( 
 select s.name, m.subject, m.marks, rank() over(partition by m.name order by m.marks desc) as rnk
@@ -21,7 +21,7 @@ left join Student as s  on S.Id = m.student_id
 ) tt
 where rnk = 1 
 
-Q.3 
+Q.3 Determine total marks for each Student? 
 select s.name, sum(marks) 
 from Marks as m 
 left join Student as s  on S.Id = m.student_id
