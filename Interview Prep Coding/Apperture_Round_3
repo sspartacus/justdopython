@@ -3,14 +3,14 @@ Q.2 Use Substring function to find last 6 character of the string?
 substring('Sadasdasd213123123sdfsfd', 19 , 6)
 
 Q.3 Find the cumulative sum of total salary with bonus for project_id? 
-sum(salary) over(order by project_id rows between unbounded preceding and current row) + 
-sum(bonus) over(order by project_id rows between unbounded preceding and current row)
+sum(salary) over (partition by project_id order by Emp_id rows between unbounded preceding and current row) + 
+sum(bonus) over(partition by project_id order by Emp_id rows between unbounded preceding and current row)
 
 Employee Details 
 Emp_Id, name, manager_id, date_of_join, city
 
 Employee_salary
-Emp_id, project, salary, bonus 
+Emp_id, project_id, salary, bonus 
 
 Q.4 Find the employee with the 3rd highest Salary? 
 select Emp_id
