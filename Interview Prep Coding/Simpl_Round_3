@@ -1,5 +1,11 @@
 Q.1 If there are user_id in Table A and user_id in Table B. How can you find the common users between the two tables? 
 Q.2 Which one is the fastest among the four techniques that you discussed? 
+1) WHERE & IN
+2) JOIN & IS NULL: Slowest
+3) INTERSECT 
+4) EXISTS
+5) USING MAX: Fastest
+
 Q.3 Why do you want to leave your current job? 
 Q.4 Tell me about the project that you are proud of? 
 Q.5 If there are users in one tables and there are user, products used in another table? Find all the users that did not used the product? 
