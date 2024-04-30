@@ -9,5 +9,9 @@ select isnull(a.id,b.id) as id,
  full join @t1 b on a.Id=b.Id and a.ParentId=b.ParentId
 
 Q.5 If Netflix have a recommendation  product, what are the metrics that you should be tracking for acheiveing the success of the product? 
+1) Percent users clicking on the recommended object/CTR 
+2) Change in subscribers
+3) User Satisfaction with recommendation
+
 Q.6 Write a python code to using the group by function on date to get the sum of amount? 
 Q.7 What is the difference between DENSE_RANK and RANK function? 
