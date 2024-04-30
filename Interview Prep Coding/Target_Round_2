@@ -1,6 +1,6 @@
 Q.1 Update department table with 10 increment in salary? 
 UPDATE Department as
-SET salary = 1.1* salary 
+SET salary = salary + 0.1*salary
 
 Q.2 Python program to find out values in b and not in a ? 
 a = [1,2,3]
