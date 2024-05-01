@@ -10,5 +10,3 @@ When using Random Forest for classification, each tree gives a classification or
 The forest chooses the classification with the majority of the “votes.” 
 When using Random Forest for regression, the forest picks the average of the outputs of all trees.
 There is low (or no) correlation between the decision trees that make up the larger Random Forest model. One tree causing error does not affect the whole decision. 
-
-Q.3) 
