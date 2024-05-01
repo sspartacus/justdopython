@@ -92,6 +92,21 @@ C  = list(combinations(L, K))
 fil = filter(lambda c: 'a' in c, C)  
 print ("{0:0.3}".format(len(list(fil))/ len(C) ) )
 
+OR
+from itertools import combinations 
+arr = ['a', 'a', 'c', 'd']
+N = 2 
+
+result = list(combinations(arr, 2))
+den = len(result)
+num = 0
+
+for (val1, val2) in result: 
+  if val1 == 'a' or val2 == 'a': 
+    num += 1 
+
+print('{0:0.4}'.format(num/den)) 
+
 10) ATHLETE SORT 
     nm = input().split()
     n = int(nm[0])
