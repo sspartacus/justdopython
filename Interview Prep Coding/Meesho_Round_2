@@ -1,0 +1,36 @@
+Q.1 Can you please tell about a project that you are proud of? 
+Q.2
+Consider a database schema with three tables:
+ 'employees' (with columns for employee_id, employee_name, and department_id)
+ 'departments' (with columns for department_id and department_name), 
+'salaries' (with columns for employee_id, salary_amount, and salary_date).
+
+ Write a SQL query to find the average salary for each department for the year 2023, excluding departments with fewer than 5 employees. 
+
+Additionally, include the department name, the total number of employees in each department, and the total amount paid in salaries for that department in 2023. Sort the result by the average salary in descending order
+
+With a as ( 
+Select department_id, total_employees
+From ( 
+Select department_id, count(employee_id) as total_employees
+From 'employees' 
+Group by department_id
+)tt 
+Where total_employees >= 5 
+), 
+
+select  e.department_id, d.department_name, a.total_employees, sum(b.total_salary) as total_salary, avg(salary_amount) as avg_salary 
+
+From salaries s
+Left join 'employees' e on e. Employee_id = s.employee_id
+Left join departments d on d.department_id = e.department_id
+Left join a on a.department_id = e.department_id
+
+Where extract(year from salary_date) = 2023 
+And a.department_id is not null 
+
+Group by e.department_id, d.department_name, total_employees 
+Order by avg(salary_amount)  desc 
+
+
+
