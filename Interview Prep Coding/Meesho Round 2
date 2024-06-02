@@ -1,0 +1,38 @@
+Q.1 Write a query to get emp_id, emp_name ? 
+1 emp_id, emp_name 
+2 emp_id, manager_id     
+1         2               
+2         3               
+3         4               
+
+--------------------------------------------
+select c.emp_name, d.emp_name as manager_name
+
+from table 2 a 
+join table 1 c on c.emp_id = a.emp_id
+join table 1 d on d.emp_id = a.manager_id
+
+
+------------------------------------
+Q.2 
+Determine the user which has max difference between login_time and 
+last_login_time? 
+
+1 user_id, login_date, login_date   
+1          2022-10-01  2022-10-02  1 
+1                      2022-10-04  3   
+3                      2022-10-04  3   
+
+-------------------------------------
+
+select user_id, max(days)
+from ( 
+select user_id, b.login_date - a.login_date as days 
+from ( 
+select user_id, login_date , rank() over(partition by user_id order by login_date) as rnk
+from table_1 a
+join (select user_id, login_date , rank() over(partition by user_id order by login_date) as rnk
+from table_1 ) b 
+on a.rnk = b.rnk+1
+) tt 
+) tt 
