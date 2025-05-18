@@ -1,0 +1,32 @@
+WITH ordered_data AS (
+  SELECT
+    custid,
+    orderid,
+    order_time,
+    deliver_time,
+    -- Get the delivery time of the previous order by the same customer
+    LAG(deliver_time) OVER (PARTITION BY custid ORDER BY order_time) AS prev_deliver_time
+  FROM
+    order_details
+),
+concurrent_orders AS (
+  SELECT
+    custid
+  FROM
+    ordered_data
+  WHERE
+    prev_deliver_time IS NOT NULL
+    AND order_time < prev_deliver_time
+  GROUP BY
+    custid
+),
+all_customers AS (
+  SELECT DISTINCT custid FROM order_details
+)
+
+SELECT
+  ROUND(COUNT(DISTINCT c.custid) * 1.0 / COUNT(DISTINCT a.custid), 4) AS proportion_concurrent_customers
+FROM
+  all_customers a
+LEFT JOIN
+  concurrent_orders c ON a.custid = c.custid;
