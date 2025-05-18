@@ -1,0 +1,16 @@
+/*
+Enter your query below.
+Please append a semicolon ";" at the end of the query
+*/
+
+
+select priority, 
+max(case when rnk = 1 then concat('[', id, ']', ' ', title) end) as top1, 
+max(case when rnk = 2 then concat('[', id, ']', ' ', title) end) as top2, 
+max(case when rnk = 3 then concat('[', id, ']', ' ', title) end) as top3 
+from (
+select tasks.*, rank() over (partition by priority order by severity desc) as rnk 
+from tasks 
+) tt 
+group by 1
+order  by priority asc
