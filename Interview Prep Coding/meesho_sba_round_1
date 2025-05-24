@@ -1,0 +1,88 @@
+1. SQL intermediate: 
+Order_type product_name count_of_transaction AOV  
+2. SQL MCQ
+Select '0' as zero 
+Forign key and referencing key
+Order by transactions 
+
+
+3. Slicer works in Excel 
+Sustitute and replace
+
+4. SQL advanced: 
+Network table: 
+Coulmns: network, dt, type, transaction 
+dt is in timestamp 
+type is either SEED or LEECH (varchar) 
+network is network name  (varchar) 
+transaction (int) 
+
+Expected: 
+Network q1 q2 q3 q4 
+x    1234 null null null 
+y    null 456 null null 
+z    null null 789 null 
+
+Query: 
+WITH leech AS (
+    SELECT 
+        CASE 
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 0 AND 5 THEN 'q1'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 6 AND 11 THEN 'q2'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 12 AND 17 THEN 'q3'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 18 AND 23 THEN 'q4'
+        END AS qtype, 
+        network, 
+        SUM(transaction) AS l_transaction
+    FROM network
+    WHERE type = 'LEECH'
+      AND DATE(dt) = (
+          SELECT MAX(DATE(dt)) FROM network
+      )
+    GROUP BY qtype, network
+), 
+seed AS (
+    SELECT 
+        CASE 
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 0 AND 5 THEN 'q1'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 6 AND 11 THEN 'q2'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 12 AND 17 THEN 'q3'
+            WHEN EXTRACT(HOUR FROM dt) BETWEEN 18 AND 23 THEN 'q4'
+        END AS qtype, 
+        network, 
+        SUM(transaction) AS s_transaction
+    FROM network
+    WHERE type = 'SEED'
+      AND DATE(dt) = (
+          SELECT MAX(DATE(dt)) FROM network
+      )
+    GROUP BY qtype, network
+), 
+combined AS (
+    SELECT 
+        l.network,
+        l.qtype,
+        CASE 
+            WHEN l.l_transaction > s.s_transaction THEN l.l_transaction + s.s_transaction
+            ELSE NULL
+        END AS transaction
+    FROM leech l
+    JOIN seed s ON l.network = s.network AND l.qtype = s.qtype
+), 
+pivoted AS (
+    SELECT 
+        network,
+        MAX(CASE WHEN qtype = 'q1' THEN transaction END) AS q1,
+        MAX(CASE WHEN qtype = 'q2' THEN transaction END) AS q2,
+        MAX(CASE WHEN qtype = 'q3' THEN transaction END) AS q3,
+        MAX(CASE WHEN qtype = 'q4' THEN transaction END) AS q4
+    FROM combined
+    GROUP BY network
+)
+SELECT * 
+FROM pivoted
+WHERE 
+    (q1 IS NULL OR q2 IS NULL OR q3 IS NULL OR q4 IS NULL)
+    AND 
+    (q1 IS NOT NULL OR q2 IS NOT NULL OR q3 IS NOT NULL OR q4 IS NOT NULL)
+ORDER BY network ASC;
