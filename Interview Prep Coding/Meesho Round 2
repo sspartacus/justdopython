@@ -36,3 +36,31 @@ from table_1 ) b
 on a.rnk = b.rnk+1
 ) tt 
 ) tt 
+
+----- 
+WITH login_with_lag AS (
+  SELECT 
+    user_id,
+    login_time,
+    LAG(login_time) OVER (PARTITION BY user_id ORDER BY login_time) AS prev_login
+  FROM your_table
+),
+login_diffs AS (
+  SELECT 
+    user_id,
+    login_time,
+    prev_login,
+    (login_time - prev_login) AS diff
+  FROM login_with_lag
+  WHERE prev_login IS NOT NULL
+),
+max_diff_per_user AS (
+  SELECT user_id, MAX(diff) AS max_gap
+  FROM login_diffs
+  GROUP BY user_id
+)
+SELECT user_id, max_gap
+FROM max_diff_per_user
+ORDER BY max_gap DESC
+LIMIT 1;
+
