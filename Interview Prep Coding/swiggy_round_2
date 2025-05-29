@@ -1,0 +1,122 @@
+Q.1 a) find the total order contribution city wise
+with total_orders as ( 
+select count(order_id) as total_orders, sum(gmv) as total_gmv
+from order_fact
+) 
+
+select city, 100.0*count(order_id)/ total_orders as order_contribution, 
+100.0*sum(gmv)/ total_gmv as gmv_contribution,
+from order_fact 
+left join user_fact using (user_id) 
+join total_orders on 1=1
+group by 1
+
+b) Find the running sales for top 10 percent customers 
+WITH user_gmv AS (
+    SELECT 
+        user_id, 
+        SUM(gmv) AS total_gmv
+    FROM order_fact
+    GROUP BY user_id
+),
+
+top_customers AS (
+    SELECT 
+        user_id,
+        CUME_DIST() OVER (ORDER BY total_gmv DESC) AS percentile
+    FROM user_gmv
+),
+
+top_10_percent AS (
+    SELECT user_id
+    FROM top_customers
+    WHERE percentile <= 0.10
+),
+
+monthly_sales AS (
+    SELECT 
+        user_id,
+        DATE_TRUNC('month', date) AS month,
+        SUM(gmv) AS sales
+    FROM order_fact
+    WHERE user_id IN (SELECT user_id FROM top_10_percent)
+    GROUP BY user_id, month
+),
+
+running_sales AS (
+    SELECT 
+        user_id,
+        month,
+        SUM(sales) OVER (PARTITION BY user_id ORDER BY month) AS running_sales
+    FROM monthly_sales
+)
+
+SELECT * FROM running_sales
+ORDER BY user_id, month;
+
+--------------
+with top_cus as ( 
+
+select user_id from ( 
+select user_id, total_gmv, 100.0*row_number() over(partition by user_id order by total_gmv desc)/total_users 
+as percent
+from ( 
+select user_id, sum(gmv) as total_gmv, 
+from order_fact
+group by 1
+) tt 
+join (select count(distinct user_id) as total_users  from order_fact) on 1=1 
+) tt 
+where percent <= 10 
+)
+
+
+select user_id, month, sales, row_number() over(partition by user_id order by month)
+( 
+select user_id, date_trunc( 'month', date)  as month, 
+sum(gmv) as sales 
+
+from order_fact
+where user_id in (select user_id from top_cus) 
+group by 1,2 
+) 
+
+Q.2 Find the retention plot for the MOM 
+Mon Count(distinct user_id) 
+Jan   1000 
+Feb   2000 
+
+with total_cust as ( 
+select date_trunc( 'month', date)  as month, 
+count(distinct user_id) 
+from order_fact
+) 
+
+Q.3 Write a case when statement Pizza order and Biryani orders 
+case when item = "Biryani' and count(order) > 0 and item = "Pizza' and count(order) > 0 then true 
+else false end as order_type
+
+Q.4 a) Key KPI's which will tell that partner is badly performing? 
+b) Can you give me an equation that will give them a score
+
+Q.5 Statistics
+1) what is Mean median and mode 
+2) When will you use median as compare to mean ? 
+1. Data is skewed 
+2. Outliers
+3. Ordinal Data 
+
+3) Ways to detect outliers 
+4) What is hypothesis testing ? 
+5) What is null hypothesis? 
+6) What is postitive or  right skewness ? 
+Mean > Median> Mode 
+
+7) What is normal distribution 
+
+Q.6) Can you explain me the projects that you are proud of? 
+Q.7) What is the fashion v/s core product analysis that you have done? 
+Q.8) What are the dashboards that you have made? 
+Q.9) What kind of chart that you have used in the visuation? 
+trend line chart 
+
