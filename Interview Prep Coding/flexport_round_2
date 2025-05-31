@@ -1,6 +1,11 @@
-/*
+Q.1 
+orders- order_id, cust_id, city, order_value , product_code, article
+users - user_id, user_name, city_id, contact 
+product_master- product_code, group division, division, category, department , subdept 
+payments- transaction_id, cust_id, order_id  
 
 
+Q.2 
 Table Structure:
 
 +---------------------------------+
