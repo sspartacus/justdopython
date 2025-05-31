@@ -1,0 +1,78 @@
+/*
+
+
+Table Structure:
+
++---------------------------------+
+|      on_time_performance        |
++---------------------+-----------+
+| id                  | int       |
++---------------------+-----------+
+| shipment_id         | int       |
++---------------------+-----------+
+| container_id        | int       |
++---------------------+-----------+
+| client_id           | int       |
++---------------------+-----------+
+| milestone_type      | string    |
++---------------------+-----------+
+| miletone_timestamp  | timestamp |
++---------------------+-----------+
+
+
+Example Output:
+
+id       | shipment_id | container_id | client_id | milestone_type | milestone_timestamp
+---------+-------------+--------------+-----------+----------------+---------------------
+593197   | 898712      | 1749721      | 915598    | actual         | 2025-03-18 17:05:27
+900433   | 898712      | 1749721      | 915598    | scheduled      | 2025-05-18 19:00:00
+470146   | 898712      | 1547152      | 915598    | actual         | 2025-03-20 15:00:00
+116982   | 898712      | 1547152      | 915598    | scheduled      | 2025-05-18 19:00:00
+137946   | 835191      | 905627       | 915598    | actual         | 2023-03-14 21:30:00
+273517   | 835191      | 905627       | 915598    | scheduled      | 2023-03-15 8:00:00
+470195   | 645925      | 1234708      | 915598    | actual         | 2023-05-08 14:00:00
+184324   | 645925      | 1234708      | 915598    | scheduled      | 2023-05-08 4:00:00
+978504   | 400539      | 885176       | 915598    | scheduled      | 2023-09-10 16:20:00
+635476   | 111981      | 652761       | 652761    | actual         | 2023-05-10 17:00:00
+939068   | 111981      | 652761       | 652761    | scheduled      | 2023-05-11 21:00:00
+633831   | 114816      | 206955       | 652761    | scheduled      | 2023-07-05 13:00:00
+833286   | 172538      | 970442       | 652761    | actual         | 2023-05-20 20:32:36
+620773   | 172538      | 970442       | 652761    | scheduled      | 2023-05-22 17:00:00
+266902   | 172538      | 975582       | 652761    | actual         | 2023-05-20 15:00:00
+959264   | 172538      | 975582       | 652761    | scheduled      | 2023-05-22 17:00:00
+1147578  | 172538      | 481528       | 652761    | actual         | 2023-05-24 14:00:00
+567794   | 172538      | 481528       | 652761    | scheduled      | 2023-05-22 17:00:00
+184913   | 104176      | 850102       | 652761    | actual         | 2023-04-06 12:36:00
+230074   | 104176      | 850102       | 652761    | scheduled      | 2023-04-07 12:30:00
+
+*/
+
+with total_shipments as ( 
+select count(distinct shipment_id) as total
+from on_time_performance
+), 
+
+actual_shipements as ( 
+SELECT shipment_id, max(milestone_timestamp) as milestone_timestamp
+from on_time_performance
+where milestone_type = 'actual'
+group by 1 
+), 
+
+scheduled_shipements as ( 
+SELECT shipment_id, max(milestone_timestamp) as milestone_timestamp
+from on_time_performance
+where milestone_type = 'scheduled'
+group by 1
+) 
+
+select shipment_id, case when scheduled_shipements.milestone_timestamp > actual_shipements.milestone_timestamp then true else false end as col
+-- count(distinct container_id)/ total as otp 
+-- scheduled_shipements.*, 
+from scheduled_shipements
+left join actual_shipements using (shipment_id)
+-- join total_shipments on 1=1 
+-- where scheduled_shipements.milestone_timestamp > actual_shipements.milestone_timestamp
+
+
+select distinct shipment_id from on_time_performance;
