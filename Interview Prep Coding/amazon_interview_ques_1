@@ -1,0 +1,22 @@
+Q.1 Can you provide an example of how you would use Pandas to clean and preprocess a large dataset for analysis in Amazon's data ecosystem?
+1 Clean nulls and duplicates
+2 Standardize column formats
+3 Feature engineer fields like purchase_month, basket_size
+4 Save the processed dataset for analysis or loading into Redshift
+
+Q.2 How would you handle missing data in a dataset using Python, and why is it important in the context of Business Intelligence?
+WHY 
+Accuracy: Dashboards and reports often drive executive decisions — missing or incorrect data affects KPIs (e.g., sales, conversion rates, retention).
+Trust: If stakeholders see blanks, inconsistencies, or frequent "N/A", they may lose confidence in your analytics.
+Model Performance: If you're feeding data into machine learning or forecasting models, missing values can degrade performance or cause failure.
+
+HOW 
+| Strategy                   | Use When…                                 | Example Code                                                       |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------------------------ |
+| Drop Rows                  | Data point is incomplete or outlier-heavy | `df.dropna()`                                                      |
+| Fill with Default/Constant | Business logic permits a safe default     | `df.fillna(0)` or `df['region'].fillna('Unknown')`                 |
+| Fill with Mean/Median      | For continuous variables (e.g., sales)    | `df['discount'].fillna(df['discount'].mean())`                     |
+| Forward/Backward Fill      | Time series or sequential data            | `df.fillna(method='ffill')`                                        |
+| Impute from Business Logic | Use domain-specific logic                 | e.g., If `payment_type` missing for `COD` orders, fill as `'Cash'` |
+
+Q.3 
