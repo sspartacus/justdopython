@@ -43,3 +43,36 @@ Improved reliability and enabled the BI team to automatically refresh dashboards
 
 Q.4 Create a Python function that emulates the behavior of an SQL INNER JOIN between two lists of dictionaries. The lists represent tables, and the dictionaries represent rows.
 Q.5 Create a Python class that maintains a rolling average of the last N numbers added to it. The class should have methods to add a new number and retrieve the current rolling average.
+Q.6 An inventory table has records for each product's warehouse location and quantity on hand. 
+Write a query to identify which warehouses have less than a 1 month supply of any given product.
+Sol. WITH MonthlySales AS (
+    SELECT
+        ProductID,
+        EXTRACT(YEAR FROM OrderDate) AS Year,
+        EXTRACT(MONTH FROM OrderDate) AS Month,
+        SUM(Quantity) AS MonthlyQty
+    FROM
+        Orders
+    GROUP BY
+        ProductID, Year, Month
+),
+AverageMonthlySales AS (
+    SELECT
+        ProductID,
+        AVG(MonthlyQty) AS AverageMonthlySales
+    FROM
+        MonthlySales
+    GROUP BY
+        ProductID
+)
+SELECT
+    i.WarehouseID,
+    i.ProductID,
+    i.QuantityOnHand,
+    a.AverageMonthlySales
+FROM
+    Inventory i
+JOIN
+    AverageMonthlySales a ON i.ProductID = a.ProductID
+WHERE
+    i.QuantityOnHand < a.AverageMonthlySales;
