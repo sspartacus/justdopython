@@ -19,4 +19,27 @@ HOW
 | Forward/Backward Fill      | Time series or sequential data            | `df.fillna(method='ffill')`                                        |
 | Impute from Business Logic | Use domain-specific logic                 | e.g., If `payment_type` missing for `COD` orders, fill as `'Cash'` |
 
-Q.3 
+Q.3 Describe a situation where you had to optimize Python code for performance. What techniques did you use, and how would you apply them to Amazon's BI task? 
+SITUATION:
+While working on a customer segmentation project for a retail client, I had a Python script that processed 8M+ transaction records. The original script took over 30 minutes to execute, 
+which slowed down daily reporting and stakeholder insights.
+
+TASK:
+I needed to optimize the code to reduce execution time without compromising accuracy, so that the marketing team could run daily cohort reports in near real-time.
+
+ACTION: 
+1. Vectorization using Pandas:
+I replaced loops and .apply() functions with native groupby and agg operations.
+2. Chunking large CSV files with Dask or pd.read_csv(chunksize=...):
+Instead of loading everything into memory, I processed data in chunks and aggregated later.
+3. Caching intermediate results:
+Used joblib to cache expensive calculations (e.g., customer-level aggregations) so they wouldn't re-run unnecessarily.
+4. Parallel processing:
+Used concurrent.futures.ThreadPoolExecutor to process customer segments in parallel batches.
+
+RESULT:
+Reduced script runtime from 30+ minutes to under 4 minutes.
+Improved reliability and enabled the BI team to automatically refresh dashboards before the daily stand-up.
+
+Q.4 Create a Python function that emulates the behavior of an SQL INNER JOIN between two lists of dictionaries. The lists represent tables, and the dictionaries represent rows.
+Q.5 Create a Python class that maintains a rolling average of the last N numbers added to it. The class should have methods to add a new number and retrieve the current rolling average.
