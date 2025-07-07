@@ -76,3 +76,5 @@ JOIN
     AverageMonthlySales a ON i.ProductID = a.ProductID
 WHERE
     i.QuantityOnHand < a.AverageMonthlySales;
+
+Q.7 Top 3 items in each warehouse based on revenue 2) Number of customers whose last transaction was higher than the previous transaction.
