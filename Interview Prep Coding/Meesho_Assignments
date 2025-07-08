@@ -72,6 +72,56 @@ Q2) Given the tables Order_Timeline(schema id,order_id,  message, created) & Ord
 Order_Timeline contains the message for the expected dispatch date, Order_shipment gives you the real dispatch date. They are combined using order_id.
 
 Ans. 
+WITH first_message_date AS (
+    SELECT
+        order_id,
+        MIN(created::date) AS expected_dispatch_date
+    FROM Order_Timeline
+    GROUP BY order_id
+),
+joined_data AS (
+    SELECT
+        s.order_id,
+        f.expected_dispatch_date,
+        s.actual_dispatch_date,
+        DATE_PART('day', s.actual_dispatch_date - f.expected_dispatch_date) AS dispatch_diff
+    FROM Order_Shipment s
+    JOIN first_message_date f ON s.order_id = f.order_id
+),
+classified AS (
+    SELECT
+        order_id,
+        dispatch_diff,
+        CASE 
+            WHEN dispatch_diff < 0 THEN 'OTIF'
+            WHEN dispatch_diff = 1 THEN 'OTIF+1'
+            WHEN dispatch_diff = 2 THEN 'OTIF+2'
+            WHEN dispatch_diff > 2 THEN 'OTIF+>2'
+            ELSE 'Other'
+        END AS category
+    FROM joined_data
+), 
+total_orders AS (
+    SELECT COUNT(*) AS total
+    FROM classified
+    WHERE category != 'Other'
+),
+category_counts AS (
+    SELECT 
+        category,
+        COUNT(*) AS order_count
+    FROM classified
+    WHERE category != 'Other'
+    GROUP BY category
+)
+SELECT 
+    c.category,
+    c.order_count,
+    ROUND(100.0 * c.order_count / t.total, 2) AS percentage
+FROM category_counts c
+JOIN total_orders t ON true
+ORDER BY c.category
+--------------------------------
 select 100.0*count(order_id) filter(where actual_dispatch_date < first_message_date)/count(*) as "(OTIF)", 
 100.0*count(order_id) filter(where actual_dispatch_date = first_message_date + interval '1 day')/count(*) as "(OTIF+1)", 
 100.0*count(order_id) filter(where actual_dispatch_date = first_message_date + interval '2 day')/count(*) as "(OTIF+2)", 
