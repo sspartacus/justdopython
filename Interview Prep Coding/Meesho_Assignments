@@ -85,29 +85,27 @@ Q1) Given an Order Table with the schema (id, user_id, total, created). Write a 
 Week Start Date is the 1st Week in which the User_Id Placed the order, Week 0 is Unique User ids who placed their 1st Order in this week. Out of those ids, Week 1 is unique users who placed an order in 1st Week + 1, Then Week 2 is 1st Week + 2, and so on till Week 10.
 
 Ans. 
+with first_order_date ( 
+select user_id, min(date-trunc('week', order_date))  as first_week
+from orders 
+group by 1
+), 
 
-WITH first_order_date AS (
-    SELECT 
-        user_id,
-        date_trunc('week', MIN(DATE_TRUNC('day', created) - INTERVAL '2 day' + (EXTRACT('DOW' FROM created) - 1) * INTERVAL '1 day')) AS week_start_date
-    M
-        "Order"
-    GROUP BY
-        user_id
-),
+date_diff as 
+(
+user_id, 
+date-trunc('week', order_date) as order_date, 
+first_week, 
+floor(date_part('week', order_date) - first_week) as week_diff
 
-Week_Diff AS (
-    SELECT
-        o.user_id,
-        fod.week_start_date,
-        EXTRACT('week' from o.created - fod.week_start_date) AS week_diff
-    FROM
-        order o 
-    LEFT JOIN
-        first_order_date fod on o.user_id = fod.user_id
-)
+from orders 
+left join first_order_date using (user_id)
+where order_date > first_week
+), 
+
+
 SELECT
-    week_start_date,
+    first_week,
     COUNT(DISTINCT CASE WHEN week_diff = 0 THEN user_id END) as "Week 00",
     COUNT(DISTINCT CASE WHEN week_diff = 1 THEN user_id END) as "Week 01",
     COUNT(DISTINCT CASE WHEN week_diff= 2 THEN user_id END) as "Week 02",
@@ -119,9 +117,10 @@ SELECT
     COUNT(DISTINCT CASE WHEN week_diff = 8 THEN user_id END) as "Week 08",
     COUNT(DISTINCT CASE WHEN week_diff = 9 THEN user_id END) as "Week 09",
     COUNT(DISTINCT CASE WHEN week_diff = 10 THEN user_id END) as "Week 10"
-FROM Week_Diff
+FROM date_diff
 GROUP BY 1
 ORDER BY 1
+
 3) a)Count total numbers of employees who are inside the office? 
 select count(distinct Employee id)
 from table as t
