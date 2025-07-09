@@ -34,6 +34,50 @@ Q3
 	NO OF EMPLOYEES WHO SPENT MORE THAN 8 HOURS AND LESS THAN 8 HOURS IN OFFICE	? 
 
 Sol. 
+WITH status_with_lead AS (
+    SELECT
+        id,
+        status,
+        timestamp,
+        LEAD(status) OVER (PARTITION BY id ORDER BY timestamp) AS next_status,
+        LEAD(timestamp) OVER (PARTITION BY id ORDER BY timestamp) AS next_timestamp
+    FROM Employee
+),
+
+paired_entries AS (
+    SELECT
+        id,
+        timestamp AS in_time,
+        next_timestamp AS out_time,
+        next_timestamp - timestamp AS duration
+    FROM status_with_lead
+    WHERE status = 'in' AND next_status = 'out'
+),
+
+employee_total_time AS (
+    SELECT
+        id,
+        SUM(duration) AS total_hours
+    FROM paired_entries
+    GROUP BY id
+),
+
+final_classification AS (
+    SELECT
+        CASE 
+            WHEN total_hours > 8 THEN 'more_than_8_hours'
+            ELSE 'less_than_or_equal_8_hours'
+        END AS category
+    FROM employee_total_time
+)
+
+SELECT 
+    category,
+    COUNT(*) AS employee_count
+FROM final_classification
+GROUP BY category
+
+------------
 select count(distinct case when total_time_spent >=8 then id end) as total_employees_more_than_equal_8, 
 count(distinct case when total_time_spent < 8 then id end) as total_employees_less_than_8
 from ( 
