@@ -78,3 +78,23 @@ WHERE
     i.QuantityOnHand < a.AverageMonthlySales;
 
 Q.7 Top 3 items in each warehouse based on revenue 2) Number of customers whose last transaction was higher than the previous transaction.
+2) WITH ranked_txns AS (
+    SELECT
+        customer_id,
+        amount,
+        transaction_date,
+        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY transaction_date DESC) AS txn_rank,
+        LAG(amount) OVER (PARTITION BY customer_id ORDER BY transaction_date DESC) AS prev_amount
+    FROM Transactions
+),
+
+last_txns AS (
+    SELECT *
+    FROM ranked_txns
+    WHERE txn_rank = 1
+      AND prev_amount IS NOT NULL
+      AND amount > prev_amount
+)
+
+SELECT COUNT(DISTINCT customer_id) AS num_customers
+FROM last_txns;
