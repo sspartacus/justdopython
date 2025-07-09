@@ -40,7 +40,7 @@ Success and Scale Bring Broad Responsibility:
 Leaders recognize the impact of their decisions and act with a sense of responsibility towards customers, employees, partners, and the world at large. 
 
 Q.13 
-Invnent and Simplify
+Invent and Simplify: 
 “Tell me about a time when you came up with a simpler or more efficient way to do something at work. How did you identify the opportunity, and what was the result?”
 LCV and HCV dashboard using Google Sheets API 
 
@@ -51,3 +51,15 @@ Capped and Estimated Demand in the Consolidated Report.
 Deliver Results: 
 "Tell me about a time when you had to meet a challenging goal or deadline. How did you ensure you delivered the expected results?"
 Product Profile redesign based on store not only products. 
+
+Customer Obession:
+"Tell me about a time when you worked to improve the customer experience. What did you do, and what was the impact?"
+Automated Email Looker Studio Report that provides daily email summary. 
+
+Bias for Action: 
+“Tell me about a time when you took quick action on a problem or decision without having all the information. What did you do, and what was the outcome?”
+Supersession Upload storage in the GCS bucket, able to increase in time resolution tickets to 10% 
+
+Learn and Be Curious: 
+"Tell me about a time you had to learn something new to complete a task or project. Why did you take that initiative, and what was the result?"
+Safety stock analysis where i learnt how can demand and lead time variations can affect the impact on safety stock. 
