@@ -1,0 +1,19 @@
+Q.1 2 SQL Questions
+1. product_id, date_added
+Find all the product that are first added and last added. 
+
+date, bike_id, trip_id, trip_duration 
+Find all the first day and last day duration for each bike and for each date. 
+Sol. 1. Using the row_number() function
+2. Using the case when and max function
+
+Q.2 Tell me about a time when you have invented a solution and simplied the solution 
+LCV and HCV Dashboard using google sheets API
+
+Q.3 Tell me a about a project of yourself that you are proud of? 
+Reduced stockouts by 10%. Safety stock analysis
+
+Feedback: 
+1. Try to better structure your questions a bit.
+2. And Don't deep dive or over explain the projects until asked.
+
