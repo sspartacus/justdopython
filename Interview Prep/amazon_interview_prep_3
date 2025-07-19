@@ -19,3 +19,21 @@ Order Delivery TAT (Turnaround Time)
 CAC = Total Marketing Spend / Number of New Customers Acquired
 CTR = (Clicks / Impressions) × 100
 ROAS = Revenue from Ads / Cost of Ads
+
+Q.2  How would you analyze a sudden drop in sales for a specific category?
+Structure: Trend comparison → Segmentation → Funnel metrics → External factors.
+
+First, I’d compare sales trends week-over-week and month-over-month for that category. Then I’d segment by key dimensions like product, geography, channel, and customer type.
+I’d check related funnel metrics: Has traffic dropped? Has conversion dipped? Is there higher cart abandonment?
+I'd also explore operational metrics like out-of-stock rates or pricing changes. 
+If nothing internal explains the drop, I’d consider external factors like seasonality, competitor pricing, or economic trends.
+
+Q.3 What metrics would you use to evaluate the performance of a retail store?
+Sales per sq. ft.
+Footfall vs. Conversion Rate
+Average Transaction Value (ATV)
+Units per Transaction (UPT)
+Stock Turnover Ratio
+Employee performance metrics like sales per associate
+Customer Satisfaction Score (CSAT) if available
+These help assess not just top-line performance, but also how efficiently the store is converting customers and managing inventory.
