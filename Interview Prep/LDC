@@ -1,6 +1,13 @@
 1) What is the difference between Classfication and Regression. 
 2) What is  difference between Having and Where clause? 
 3) What is RandomForestClassifer? How does it works? 
+A decision tree makes predictions by asking a series of yes/no questions (like 20 questions). 
+A random forest grows many such trees and makes a majority vote decision.
+
+Advantages: High accuracy
+Robust to overfitting (more than single decision trees)
+Works well on unbalanced & missing data
+
 4) Is Delete a DML or a DDL Command? 
 5) Write a Syntax statement for Case statement in SQL? 
 6) Have you worked on any projects related to time-series forecasting? 
