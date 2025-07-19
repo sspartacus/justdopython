@@ -28,11 +28,27 @@ def generate_words(s):
     for p in perm:
         print(''.join(p))
 Q.7 What is Lambda Function in Python ? 
+It can take any number of arguments but only one expression, which is evaluated and returned.
+
+nums = [1, 2, 3, 4]
+squared = list(map(lambda x: x**2, nums))
+print(squared)
 Q.8 Split a string using a Regular Expression in Python? 
+import re
+
+text = "apple,banana;cherry"
+result = re.split(r'([,;])', text)
+print(result)
 Q.9 Write a function to check if a number is Palindrome or not ? 
 Q.10 Check if a number is Prime or Not? 
 Q.11 How much time that a particular python code will take to execute? 
 Q.12 Difference between Numpy and Pandas? 
+Use NumPy for performance-heavy numeric computation and matrix operations.
+Use Pandas for real-world datasets that need filtering, grouping, joining, or cleaning.
+| Aspect         | NumPy                  | Pandas                            |
+| -------------- | ---------------------- | --------------------------------- |
+| Primary Use    | Numerical computation  | Data manipulation and analysis    |
+| Data Structure | Arrays (n-dimensional) | DataFrames (tabular), Series (1D) |
 
 
 
