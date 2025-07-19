@@ -30,10 +30,13 @@ If nothing internal explains the drop, I’d consider external factors like seas
 
 Q.3 What metrics would you use to evaluate the performance of a retail store?
 Sales per sq. ft.
-Footfall vs. Conversion Rate
-Average Transaction Value (ATV)
+Footfall vs. Conversion Rate: Conversion Rate = (Transactions / Footfall) × 100
+Average Transaction Value (ATV): ATV = Total Sales / Number of Transactions
 Units per Transaction (UPT)
 Stock Turnover Ratio
-Employee performance metrics like sales per associate
-Customer Satisfaction Score (CSAT) if available
-These help assess not just top-line performance, but also how efficiently the store is converting customers and managing inventory.
+Employee performance metrics like Sales per Associate
+Customer Satisfaction Score (CSAT) if available: CSAT = (Number of Satisfied Responses / Total Responses) × 100
+
+Q.4 
+
+
