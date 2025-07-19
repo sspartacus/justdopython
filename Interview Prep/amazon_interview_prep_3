@@ -1,0 +1,18 @@
+Metrics 
+Q.1 What are some key metrics you would track for an e-commerce retail business?
+Customer metrics: Conversion rate, Average Order Value (AOV), Customer Lifetime Value (CLV), and Repeat Purchase Rate.
+Product metrics: Sell-through rate, Return rate, and Gross Margin by product.
+Operational metrics: Inventory turnover, Fulfillment rate, and Order delivery TAT.
+Marketing metrics: CAC (Customer Acquisition Cost), CTR, and ROAS.
+These help identify what’s driving performance across funnels—from acquisition to retention—and optimize accordingly.
+
+Conversion Rate = (Number of Purchases / Number of Visitors) × 100
+AOV = Total Revenue / Number of Orders
+CLV = AOV × Purchase Frequency × Average Customer Lifespan
+Repeat Purchase Rate = (Number of Returning Customers / Total Customers) × 100
+Sell-Through Rate = (Units Sold / Units Received) × 100
+Return Rate = (Number of Units Returned / Number of Units Sold) × 100
+Gross Margin = (Selling Price - Cost of Goods Sold) / Selling Price × 100
+Inventory Turnover = Cost of Goods Sold / Average Inventory
+Fulfillment Rate = (Orders Fulfilled / Orders Placed) × 100
+Order Delivery TAT (Turnaround Time)
