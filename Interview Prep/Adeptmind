@@ -3,7 +3,10 @@ Company: Country Delight
 Date: 07/07/23
 
 Q.1 What is Action filter in Tableau? 
+It is a dynamic filtering mechanism that allows users to interact with one visualization to filter data in another.
 
+When a user clicks, hovers, or selects data in one sheet (the source), Tableau applies that selection as a 
+filter to another sheet (the target) — showing only the related data.
 
 Technical Interview Questions 
 Company: Adeptmind
@@ -18,6 +21,12 @@ Q.5 Write Command:
 2) to drop fields with missing values 
 3) make a Dataframe 
 Q.6 Print all possible words with the String 'abc'? 
+from itertools import permutations
+
+def generate_words(s):
+    perm = permutations(s)
+    for p in perm:
+        print(''.join(p))
 Q.7 What is Lambda Function in Python ? 
 Q.8 Split a string using a Regular Expression in Python? 
 Q.9 Write a function to check if a number is Palindrome or not ? 
