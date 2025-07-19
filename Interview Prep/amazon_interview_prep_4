@@ -1,0 +1,37 @@
+PROBLEM SOLVING
+Q.1 A product’s sales dropped 20% last month. How would you investigate?
+Compare YoY & MoM trends to confirm if the drop is seasonal.
+Segment the impact: Which store/region/product/category is driving the decline?
+Identify levers: Review pricing, promotions, inventory levels, competitor activity.
+Analyze customer behavior: Lower traffic, reduced basket size, or lower conversion
+
+Q.2 A dashboard you built is showing unexpected results. What do you do?
+I’d first validate the data source—check if upstream pipelines or tables changed. Then, I’d check filters, joins, and calculations in the dashboard logic. 
+If data is correct, I’d document anomalies and consult with stakeholders to align on expectations
+
+Q.3 A key stakeholder is unhappy with your report saying it doesn't give them insights. What do you do?
+I’d set up a call to understand what decisions they’re trying to make and what information they feel is missing. 
+Then I’d iterate the report—maybe simplify visuals, add filters, or refocus KPIs—based on their feedback
+
+Q.4 You’re given a messy dataset. How do you approach cleaning it?
+I’d start by profiling the data: checking for nulls, outliers, data types, and duplicates. I’d define business rules—e.g., valid date ranges, 
+known categories—to filter or impute missing values. Documentation is key, especially for assumptions made.
+
+Q.5 How would you estimate the size of the online grocery market in India
+Let’s assume India’s population is ~1.4B. Assume 30% are active internet users who shop online = 420M. Of these, 
+maybe 20% buy groceries online = 84M. Average monthly spend = ₹1K → ₹12K/year → Total market = ₹1 Trillion+
+
+Q.6 If you had to increase in-store conversion by 10%, how would you approach it?
+I’d begin with funnel metrics: Footfall → Engagement → Transactions. I’d analyze:
+Store layout/merchandising
+Associate performance
+Promotions/offers
+Stock availability
+Then, I’d run A/B tests to validate ideas, e.g., product placement or offer types.”
+
+TIPS: 
+Think Aloud: Don’t jump to solutions; explain your approach step by step.
+Use Frameworks: Like Funnel, 5 Whys, Root Cause Tree, etc.
+Quantify When Possible: Numbers make your analysis impactful.
+Balance Technical & Business View: It’s not just SQL, it’s insight.
+End With a Recommendation: What action should the business take?
