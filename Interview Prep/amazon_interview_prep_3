@@ -1,4 +1,4 @@
-Metrics 
+TOPIC 1: METRICS 
 Q.1 What are some key metrics you would track for an e-commerce retail business?
 Customer metrics: Conversion rate, Average Order Value (AOV), Customer Lifetime Value (CLV), and Repeat Purchase Rate.
 Product metrics: Sell-through rate, Return rate, and Gross Margin by product.
@@ -60,3 +60,28 @@ Use specific, relevant examples.
 Quantify where possible.
 Think end-to-end: data → analysis → action → impact.
 
+TOPIC 2:REPORTING 
+Q.6 What are the key metrics you include in a retail sales performance report?
+In a typical retail sales report, I include total sales, sales per sq. ft., footfall vs. conversion rate, ATV, UPT, and stock turnover. 
+These give a holistic view of store performance, customer engagement, and inventory efficiency
+
+Q.7 How do you decide which metrics to include in a report?
+I first understand the audience and the business problem. For store managers, I’d focus on daily sales, footfall, conversion rates, and stock levels. 
+For leadership, I’d prioritize trends, YoY growth, gross margin, and CLV.
+
+Q.8 What tools have you used to build reports or dashboards?
+I’ve used Excel for ad hoc analysis and Tableau for interactive dashboards. 
+I also use SQL to pull data from our data warehouse, and sometimes Python for automating reporting pipelines.
+
+Q.8 How do you handle discrepancies or missing data in reports?
+I start by validating the data source and checking for NULLs or unexpected values. 
+
+Q.9  Tell me about a time you automated a recurring report.
+
+Q.10  How do you ensure reports are easy to interpret by business stakeholders?
+I focus on clean design: consistent colors, clear legends. I use filters to let users drill down into what matters to them, 
+and I always validate that definitions are consistent with business terms.
+
+Q.11 How would you report on an underperforming store or category? 
+I’d start with a comparative view—vs. other stores, same period last year, or plan. Then, I’d break down sales drivers—footfall, conversion rate, AOV, 
+stock-outs, etc. I might also look into customer feedback and product returns.
