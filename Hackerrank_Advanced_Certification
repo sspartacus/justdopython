@@ -15,20 +15,26 @@ ORDER BY algorithm
 
 Q.1 Find the total hours work on weekends?
 
-select emp_id, sum(hours) as work_hours
-from ( 
-select emp_id, current_d, truncate((hour(logout_timestamp) +  (minute(logout_timestamp)/60)) -  (hour(login_timestamp) +  (minute(login_timestamp)/60)),0) as hours
-
-from ( 
-select a.emp_id, CAST(a.timestamp AS DATE) as current_d, MIN(timestamp) AS login_timestamp, 
-MAX(timestamp) AS logout_timestamp
-from attendance a 
-group by a.emp_id, CAST(a.timestamp AS DATE)
-) tt 
-where weekday(current_d) in (5,6)
-) tt 
-group by emp_id 
-order by sum(hours) desc 
-
-
-
+WITH daily_logs AS (
+    SELECT 
+        emp_id,
+        DATE(timestamp) AS log_date,
+        MIN(timestamp) AS login_time,
+        MAX(timestamp) AS logout_time
+    FROM attendance
+    GROUP BY emp_id, DATE(timestamp)
+),
+weekend_logs AS (
+    SELECT 
+        emp_id,
+        log_date,
+        TIMESTAMPDIFF(SECOND, login_time, logout_time) / 3600.0 AS hours_worked
+    FROM daily_logs
+    WHERE WEEKDAY(log_date) IN (5, 6)
+)
+SELECT 
+    emp_id,
+    ROUND(SUM(hours_worked), 2) AS total_weekend_hours
+FROM weekend_logs
+GROUP BY emp_id
+ORDER BY total_weekend_hours DESC;
