@@ -2,6 +2,49 @@
 2) In the assignment that you have submitted, what other method could you use to solve the problem? 
 3) If there 100 catalogues submitted by a supplier and you have to give 20 percent discount on some of the catalogues then what which catalogue will you sent? 
 4) We have historical data for a customer and we want to engage this user onto our platform, what data will you use? 
+A. Behavioural Data
+Last login / visit date
 
+Frequency of usage (daily/weekly/monthly active)
 
+Session duration
 
+Pages visited / actions taken
+
+Drop-off points (e.g., cart abandonment)
+
+B. Transaction Data
+Purchase history (products bought, frequency)
+
+Average order value
+
+Refunds / returns
+
+Subscription status or churn markers
+
+C. Engagement Data
+Email/SMS/app notification open & click rates
+
+Response to past campaigns
+
+Referral behavior
+
+Wishlist or saved items
+
+D. Demographic & Psychographic Data
+Location, age, gender
+
+Device used
+
+Preferred categories
+
+Discount sensitivity
+
+E. Churn Signals
+Time since last activity
+
+Reduced frequency
+
+Negative feedback or complaints
+
+Unsubscribed from communications
