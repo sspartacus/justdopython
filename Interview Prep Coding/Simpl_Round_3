@@ -6,6 +6,15 @@ Q.2 Which one is the fastest among the four techniques that you discussed?
 4) EXISTS
 5) USING MAX: Fastest
 
+| Method         | Efficiency                      | Notes                              |
+| -------------- | ------------------------------- | ---------------------------------- |
+| **INNER JOIN** | ✅ Best for most RDBMS           | Fast with proper indexing          |
+| **INTERSECT**  | ✅ Efficient but limited support | Cleaner syntax, removes duplicates |
+| **EXISTS**     | ✅ Efficient with large `TableA` | Good alternative to joins          |
+| **IN**         | ❌ Slower on large `TableB`      | Avoid if possible                  |
+| **MAX**        | ✅ Most Efficient       
+
+
 Q.3 Why do you want to leave your current job? 
 Q.4 Tell me about the project that you are proud of? 
 Q.5 If there are users in one tables and there are user, products used in another table? Find all the users that did not used the product? 
