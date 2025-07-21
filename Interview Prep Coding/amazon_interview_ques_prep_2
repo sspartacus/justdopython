@@ -57,8 +57,10 @@ Customer Obession:
 Automated Email Looker Studio Report that provides daily email summary. 
 
 Bias for Action: 
-“Tell me about a time when you took quick action on a problem or decision without having all the information. What did you do, and what was the outcome?”
+1) “Tell me about a time when you took quick action on a problem or decision without having all the information. What did you do, and what was the outcome?”
 Supersession Upload storage in the GCS bucket, able to increase in time resolution tickets to 10% 
+
+2) "Tell me about a time when you had to deliver a data solution or report under a tight deadline, but the data was incomplete or messy. How did you handle it?"
 
 Learn and Be Curious: 
 "Tell me about a time you had to learn something new to complete a task or project. Why did you take that initiative, and what was the result?"
