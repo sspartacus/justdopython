@@ -14,17 +14,22 @@ ORDER BY 1;
 
 
 Q2	for last one month top 3 earning cars in each type
-select type, car_id
-from ( 
-select car_id, Car.type, dense_rank() over(partition by Car.type order by sum(Total_fare) desc) as rnk , 
-sum(Total_fare) as total_earnings 
+SELECT 
+    type, 
+    car_id
+FROM (
+    SELECT 
+        c.type,
+        b.car_id,
+        SUM(b.total_fare) AS total_earnings,
+        DENSE_RANK() OVER (PARTITION BY c.type ORDER BY SUM(b.total_fare) DESC) AS rnk
+    FROM Booking b
+    LEFT JOIN Car c ON b.car_id = c.id
+    WHERE b.ends >= CURRENT_DATE - INTERVAL '1 month'
+    GROUP BY c.type, b.car_id
+) tt
+WHERE rnk <= 3;
 
-from Booking 
-left join Car on Booking.car_id =  Car.id
-where ends >= now()::date - interval '1 month'
-group by 1,2,3
-) tt 
-where rnk <=3 
 
 Q3			
 	Employee		
