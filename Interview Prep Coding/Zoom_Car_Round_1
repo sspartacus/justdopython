@@ -3,10 +3,15 @@ Booking						User			Car
 car_id	starts	ends	Total_fare		id	city		id	type	city
 
 Q1	MOM for past 6 months across cities ATV and ATD
-select date_trunc('month', ends) as date, avg(extract('hour' from ends-starts))  as avg_time_duration_hrs,  avg(total_fare) as avg_fare
-from Booking 
-where ends >= now()::date - interval '6 month'
-group by 1 
+SELECT 
+    DATE_TRUNC('month', ends) AS date,
+    AVG(EXTRACT(EPOCH FROM ends - starts) / 3600) AS avg_time_duration_hrs,
+    AVG(total_fare) AS avg_fare
+FROM Booking
+WHERE ends >= (CURRENT_DATE - INTERVAL '6 months')
+GROUP BY 1
+ORDER BY 1;
+
 
 Q2	for last one month top 3 earning cars in each type
 select type, car_id
