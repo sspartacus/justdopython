@@ -1,0 +1,102 @@
+1. Could you tell something about yourself ?
+
+Sure. I’m a Business Analyst with around 4.5 years of experience in data analytics, primarily working on retail operations, inventory, and supply-chain problems.
+
+Currently, I’m with Impact Analytics, where I work with business and technical teams to translate business problems into data-driven solutions. I’ve worked on inventory allocation, replenishment, safety stock, automation, and reporting, using tools like SQL, BigQuery, Python, Excel, and Tableau.
+
+My key strength is understanding the business problem, analyzing the data, and converting the findings into practical solutions. I’m now looking for a Senior BA role where I can take broader ownership and solve more complex business problems.
+
+
+
+Case Study Questions: 
+
+Case 1 — Retail
+
+A retailer has 1,000 stores. Overall sales are flat, but management believes inventory availability is hurting revenue. How would you determine whether inventory is actually the problem?
+
+Be prepared to discuss:
+
+Sales → Inventory → Availability → Stockouts → Lost sales → Store/SKU segmentation → Root cause → Action → KPI measurement
+
+
+
+2. SQL Questions: 
+How would you identify gaps in dates?
+WITH ordered_dates AS (
+    SELECT 
+        user_id,
+        log_date AS curr_date,
+        -- Get the date from the previous consecutive row
+        LAG(log_date) OVER (PARTITION BY user_id ORDER BY log_date) AS prev_date
+    FROM user_logins
+)
+SELECT 
+    user_id,
+    prev_date + INTERVAL '1' DAY AS gap_start,
+    curr_date - INTERVAL '1' DAY AS gap_end,
+    (curr_date - prev_date) - 1 AS missing_days
+FROM ordered_dates
+-- A gap exists if the difference between consecutive dates is more than 1 day
+WHERE (curr_date - prev_date) > 1
+ORDER BY user_id, gap_start;
+
+3. 
+WITH store_monthly_revenue AS (
+    SELECT 
+        o.store_id,
+        s.store_name, -- Assuming a store_name column exists in stores table
+        DATE_TRUNC('month', o.order_date) AS revenue_month,
+        SUM(o.quantity * p.price) AS total_revenue -- Adjust columns based on your schema
+    FROM orders o
+    JOIN products p ON o.product_id = p.product_id
+    JOIN stores s ON o.store_id = s.store_id
+    GROUP BY o.store_id, s.store_name, DATE_TRUNC('month', o.order_date)
+),
+mom_comparison AS (
+    SELECT 
+        store_id,
+        store_name,
+        revenue_month,
+        total_revenue AS current_month_revenue,
+        LAG(total_revenue) OVER (PARTITION BY store_id ORDER BY revenue_month) AS prev_month_revenue
+    FROM store_monthly_revenue
+),
+revenue_decline AS (
+    SELECT 
+        store_id,
+        store_name,
+        revenue_month,
+        prev_month_revenue,
+        current_month_revenue,
+        (prev_month_revenue - current_month_revenue) AS revenue_drop,
+        ((current_month_revenue - prev_month_revenue) / NULLIF(prev_month_revenue, 0)) * 100 AS pct_change
+    FROM mom_comparison
+)
+SELECT 
+    store_id,
+    store_name,
+    prev_month_revenue,
+    current_month_revenue,
+    revenue_drop,
+    ROUND(pct_change, 2) AS pct_change
+FROM revenue_decline
+WHERE revenue_month = DATE_TRUNC('month', CURRENT_DATE) -- Filters for the active/latest month
+  AND revenue_drop > 0
+ORDER BY revenue_drop DESC;
+
+
+4. Find the top 10 customers by revenue.
+
+import pandas as pd
+
+# Load your dataset
+# df = pd.read_csv('sales_data.csv')
+
+# Group by customer and sum the revenue
+customer_revenue = df.groupby('customer_name')['revenue'].sum().reset_index()
+
+# Sort by revenue in descending order and get the top 10
+top_10_customers = customer_revenue.sort_values(by='revenue', ascending=False).head(10)
+
+print(top_10_customers)
+
