@@ -1,0 +1,113 @@
+Candidate Name: Kuldeep Rathore
+
+Q. Given transactions table, calculate the month-over-month (MoM) percentage change in total transaction amount for each merchant for the last 6 months (based on the latest date in the data).
+
+Please Note:
+- Consider only success transactions
+- MOM % change = (Current Month Amount - Previous Month Amount)/(Previous Month Amount) x 100
+- There could be months where merchants are not transacting
+
+
+Transaction Table (Sample Data):
+| id | merchant_id | amount | status  | txn_time   |
+| -- | ----------- | ------ | ------- | ---------- |
+| 1  | 101         | 1000   | SUCCESS | 2025-09-10 |
+| 2  | 101         | 1500   | SUCCESS | 2025-10-12 |
+| 3  | 101         | 1200   | SUCCESS | 2025-11-05 |
+| 4  | 101         | 1800   | SUCCESS | 2025-12-20 |
+| 5  | 101         | 2000   | SUCCESS | 2026-01-15 |
+| 6  | 101         | 2500   | SUCCESS | 2026-02-10 |
+| 7  | 102         | 500    | SUCCESS | 2025-11-11 |
+| 8  | 102         | 700    | SUCCESS | 2025-12-01 |
+| 9  | 102         | 900    | SUCCESS | 2026-01-18 |
+| 10 | 102         | 600    | SUCCESS | 2026-02-22 |
+| 11 | 103         | 800    | FAILED  | 2026-01-10 |
+
+with latest_month as (
+select max(txn_time) as latest_month_date
+from Transaction
+),
+
+imputed_months as (
+select SEQUENCE(latest_month_date, latest_month_date - interval '5 month',  interval '1 month') as month
+),
+
+mom_trans (
+select date_trunc('month', txn_time) as month, merchant_id, sum(amount) as amount
+from Transaction
+where status = 'SUCCESS'
+and txn_time > latest_month_date - interval '6 month'
+GROUP by 1,2
+)
+
+
+select merchant_id, 100.0*(amount-prev_month)/nullif(prev_month,0) as mom_growth
+from (
+select *,
+lag(amount) over(partition by merchant_id order by month asc ) as prev_month
+from mom_trans
+cross join imputed_months
+) tt
+
+
+
+Q. In a wallet system, each user has a wallet where money can be credited and debited over time.
+Given credits and debits tables, calculate the number of wallets that have a positive balance at the end of each month for the past 6 months (based on the latest date in the data).
+
+Credits table (Sample Data):
+| id | wallet_id | amount | time       |
+| -- | --------- | ------ | ---------- |
+| 1  | 101       | 1000   | 2026-01-05 |
+| 2  | 101       | 500    | 2026-02-10 |
+| 3  | 102       | 700    | 2026-01-15 |
+| 4  | 103       | 400    | 2026-02-20 |
+
+
+Debits table (Sample Data):
+| id | wallet_id | amount | time       |
+| -- | --------- | ------ | ---------- |
+| 1  | 101       | 300    | 2026-01-20 |
+| 2  | 101       | 800    | 2026-02-25 |
+| 3  | 102       | 200    | 2026-02-05 |
+| 4  | 103       | 500    | 2026-02-28 |
+
+with  latest_date
+select max(time) as latest_month_date
+from Transaction
+),
+
+
+imputed_months as (
+select SEQUENCE(latest_month_date, latest_month_date - interval '5 month',  interval '1 month') as month
+),  
+
+credits_cte as (
+select date_trunc('month', time) as month, id, wallet_id, sum(amount)  as credit
+from Credits
+where time > latest_month_date - interval '6 month'
+group by 1,2,3
+),
+
+debit_cte as (
+select date_trunc('month', time) as month, id, wallet_id, sum(amount) as debit
+from Debits
+where time > latest_month_date - interval '6 month'
+group by 1,2,3
+)
+
+
+select count(distinct wallet_id)
+from (
+select month, id, wallet_id,
+sum(credit) over (parition by wallet_id order by month rows between unbounded preceding and current row ) as credit,
+sum(debit) over (parition by wallet_id order by month rows between unbounded preceding and current row ) as debit,
+sum(credit) over (parition by wallet_id order by month rows between unbounded preceding and current row )-sum(debit) over (parition by wallet_id order by month rows between unbounded preceding and current row )
+as balance
+from credits_cte
+left join debit_cte as (
+ using (month, id,wallet_id)
+ ) tt
+where balance > 0
+
+
+
