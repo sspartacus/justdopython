@@ -74,10 +74,75 @@ LEFT JOIN churn c
 ORDER BY m.month;
 
 
-Q.2 Write a SQL query to give active and success sessions  
+Q.2 Write a SQL query to give active and success sessions  on Amazon Platform. 
+Session: A series of sequence of events with page view event
+Success Session: A session with at least one purchase
 User_id, event_id, timestamp
 111, page_view, 2026-09-09 12:12:12 
 111, purchase, 2026-09-09 13:12:12 
 
 Output
-Active Session  Success Session  Percentage
+Session  Success_Session  Percentage
+
+Ans. 
+WITH sessionized AS (
+    SELECT
+        user_id,
+        event_id,
+        timestamp,
+
+        -- Every page_view starts a new session
+        SUM(
+            CASE
+                WHEN event_id = 'page_view' THEN 1
+                ELSE 0
+            END
+        ) OVER (
+            PARTITION BY user_id
+            ORDER BY timestamp
+        ) AS session_id
+
+    FROM user_events
+),
+
+session_summary AS (
+    SELECT
+        user_id,
+        session_id,
+
+        MAX(
+            CASE
+                WHEN event_id = 'page_view' THEN 1
+                ELSE 0
+            END
+        ) AS has_page_view,
+
+        MAX(
+            CASE
+                WHEN event_id = 'purchase' THEN 1
+                ELSE 0
+            END
+        ) AS has_purchase
+
+    FROM sessionized
+    GROUP BY user_id, session_id
+)
+
+SELECT
+    COUNTIF(has_page_view = 1) AS sessions,
+
+    COUNTIF(
+        has_page_view = 1
+        AND has_purchase = 1
+    ) AS success_sessions,
+
+    ROUND(
+        100.0 * COUNTIF(
+            has_page_view = 1
+            AND has_purchase = 1
+        )
+        / COUNTIF(has_page_view = 1),
+        2
+    ) AS percentage
+
+FROM session_summary;
