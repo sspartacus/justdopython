@@ -23,6 +23,87 @@ Transaction Table (Sample Data):
 | 10 | 102         | 600    | SUCCESS | 2026-02-22 |
 | 11 | 103         | 800    | FAILED  | 2026-01-10 |
 
+
+Actual Answer: 
+WITH date_range AS (
+    SELECT
+        DATE_TRUNC(DATE(MAX(txn_time)), MONTH) AS latest_month
+    FROM transactions
+),
+
+months AS (
+    SELECT month
+    FROM date_range,
+    UNNEST(
+        GENERATE_DATE_ARRAY(
+            DATE_SUB(latest_month, INTERVAL 5 MONTH),
+            latest_month,
+            INTERVAL 1 MONTH
+        )
+    ) AS month
+),
+
+merchants AS (
+    SELECT DISTINCT merchant_id
+    FROM transactions
+),
+
+merchant_months AS (
+    SELECT
+        m.merchant_id,
+        mo.month
+    FROM merchants m
+    CROSS JOIN months mo
+),
+
+monthly_amount AS (
+    SELECT
+        merchant_id,
+        DATE_TRUNC(DATE(txn_time), MONTH) AS month,
+        SUM(amount) AS total_amount
+    FROM transactions
+    WHERE status = 'SUCCESS'
+    GROUP BY merchant_id, month
+),
+
+final_data AS (
+    SELECT
+        mm.merchant_id,
+        mm.month,
+        COALESCE(ma.total_amount, 0) AS total_amount
+    FROM merchant_months mm
+    LEFT JOIN monthly_amount ma
+        ON mm.merchant_id = ma.merchant_id
+        AND mm.month = ma.month
+)
+
+SELECT
+    merchant_id,
+    month,
+    total_amount,
+    LAG(total_amount) OVER (
+        PARTITION BY merchant_id
+        ORDER BY month
+    ) AS previous_month_amount,
+
+    ROUND(
+        SAFE_DIVIDE(
+            total_amount - LAG(total_amount) OVER (
+                PARTITION BY merchant_id
+                ORDER BY month
+            ),
+            LAG(total_amount) OVER (
+                PARTITION BY merchant_id
+                ORDER BY month
+            )
+        ) * 100,
+        2
+    ) AS mom_percentage_change
+
+FROM final_data
+ORDER BY merchant_id, month;
+
+Me: 
 with latest_month as (
 select max(txn_time) as latest_month_date
 from Transaction
