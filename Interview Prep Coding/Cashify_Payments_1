@@ -189,6 +189,3 @@ left join debit_cte as (
  using (month, id,wallet_id)
  ) tt
 where balance > 0
-
-
-
