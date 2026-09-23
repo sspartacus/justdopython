@@ -1,0 +1,83 @@
+Q.1 Write a SQL query to calculate new users, active users, and churn users on a ecom platform thorugh Jan to June? 
+Table: 
+user_id  login_timestamp
+
+Output: 
+Month, Active Users, New Users, Churn Users
+
+Ans. 
+WITH activity AS (
+    SELECT DISTINCT
+        user_id,
+        DATE_TRUNC(DATE(timestamp), MONTH) AS month
+    FROM user_activity
+),
+
+first_activity AS (
+    SELECT
+        user_id,
+        MIN(month) AS first_month
+    FROM activity
+    GROUP BY user_id
+),
+
+months AS (
+    SELECT DISTINCT month
+    FROM activity
+),
+
+monthly_metrics AS (
+    SELECT
+        m.month,
+
+        -- Active users
+        COUNT(DISTINCT a.user_id) AS active_users,
+
+        -- New users
+        COUNT(DISTINCT CASE
+            WHEN a.month = f.first_month THEN a.user_id
+        END) AS new_users
+
+    FROM months m
+    LEFT JOIN activity a
+        ON a.month = m.month
+    LEFT JOIN first_activity f
+        ON a.user_id = f.user_id
+    GROUP BY m.month
+),
+
+churn AS (
+    SELECT
+        m.month,
+        COUNT(DISTINCT a.user_id) AS churn_users
+    FROM months m
+    JOIN activity a
+        ON a.month = DATE_SUB(m.month, INTERVAL 11 MONTH)
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM activity a2
+        WHERE a2.user_id = a.user_id
+          AND a2.month > a.month
+          AND a2.month <= m.month
+    )
+    GROUP BY m.month
+)
+
+SELECT
+    m.month,
+    m.active_users,
+    m.new_users,
+    COALESCE(c.churn_users, 0) AS churn_users
+FROM monthly_metrics m
+LEFT JOIN churn c
+    ON m.month = c.month
+ORDER BY m.month;
+
+
+Q.2 Write a SQL query to give active and success sessions  
+User_id, event_id, timestamp
+111, page_view, 2026-09-09 12:12:12 
+111, purchase, 2026-09-09 13:12:12 
+
+Output
+Active Session  Success Session  Percentage
