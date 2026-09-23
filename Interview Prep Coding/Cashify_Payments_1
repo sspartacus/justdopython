@@ -152,6 +152,99 @@ Debits table (Sample Data):
 | 3  | 102       | 200    | 2026-02-05 |
 | 4  | 103       | 500    | 2026-02-28 |
 
+Actual: 
+WITH all_transactions AS (
+
+    SELECT
+        wallet_id,
+        time,
+        amount AS credit,
+        0 AS debit
+    FROM credits
+
+    UNION ALL
+
+    SELECT
+        wallet_id,
+        time,
+        0 AS credit,
+        amount AS debit
+    FROM debits
+),
+
+date_range AS (
+    SELECT
+        DATE_TRUNC(DATE(MAX(time)), MONTH) AS latest_month
+    FROM all_transactions
+),
+
+months AS (
+    SELECT month
+    FROM date_range,
+    UNNEST(
+        GENERATE_DATE_ARRAY(
+            DATE_SUB(latest_month, INTERVAL 5 MONTH),
+            latest_month,
+            INTERVAL 1 MONTH
+        )
+    ) AS month
+),
+
+wallets AS (
+    SELECT DISTINCT wallet_id
+    FROM all_transactions
+),
+
+wallet_months AS (
+    SELECT
+        w.wallet_id,
+        m.month
+    FROM wallets w
+    CROSS JOIN months m
+),
+
+monthly_transactions AS (
+    SELECT
+        wallet_id,
+        DATE_TRUNC(DATE(time), MONTH) AS month,
+        SUM(credit) AS credits,
+        SUM(debit) AS debits
+    FROM all_transactions
+    GROUP BY wallet_id, month
+),
+
+wallet_monthly_balance AS (
+    SELECT
+        wm.wallet_id,
+        wm.month,
+        COALESCE(mt.credits, 0) AS credits,
+        COALESCE(mt.debits, 0) AS debits
+    FROM wallet_months wm
+    LEFT JOIN monthly_transactions mt
+        ON wm.wallet_id = mt.wallet_id
+        AND wm.month = mt.month
+),
+
+running_balance AS (
+    SELECT
+        wallet_id,
+        month,
+        SUM(credits - debits) OVER (
+            PARTITION BY wallet_id
+            ORDER BY month
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS balance
+    FROM wallet_monthly_balance
+)
+
+SELECT
+    month,
+    COUNTIF(balance > 0) AS positive_wallet_count
+FROM running_balance
+GROUP BY month
+ORDER BY month;
+
+Me: 
 with  latest_date
 select max(time) as latest_month_date
 from Transaction
