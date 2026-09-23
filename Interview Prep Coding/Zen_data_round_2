@@ -1,0 +1,19 @@
+Q.1 Write a SQL query to calcualte  total qunantity of orders for each user on a given date. 
+SELECT
+    user,
+    date,
+    quantity,
+    SUM(quantity) OVER (
+        ORDER BY date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS cumulative_quantity
+FROM original_table;
+
+
+Q.2 If you cross join it with same table then how will you get the same results again. 
+Q.3 What is the difference b/w bagging and boosting? 
+Q.4 What is the difference b/w Classification and Regression? 
+
+
+
+
