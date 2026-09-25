@@ -26,6 +26,11 @@ Timestamp                      user_id
 
 On how many weekdays did each user login on the app. (assume that a function is_weekday() is already created for your ease, to which you can pass a string and it gives you weather it is a weekday )
 
+import pandas as pd
+df['timestamp'] = pd.to_datetime(df['timestamp'])
+df['is_weekday'] = df['timestamp'].dt.weekday < 5
+df[df['is_weekday']].groupby('user_id')['timestamp'].nunique().reset_index(name = 'week_day_count')
+---------------------------
 import pandas as pd 
 from datetime import datetime
 df = pd.DataFrame({'timestamp': ['2022-01-01  09:06:55', '2022-01-01  09:07:16', '2022-01-01  09:07:20', '2022-01-03  11:07:20', '2022-01-04  10:07:20'], 'user_id': [101,101,102,102,101]})
