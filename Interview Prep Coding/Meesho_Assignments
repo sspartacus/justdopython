@@ -15,6 +15,36 @@ Please write SQL queries for the below points
 Note: You are allowed to make any assumption
 
 Sol. 
+WITH monthly_units AS (
+    SELECT
+        DATE_TRUNC('month', order_date) AS month,
+        SUM(quantity) AS units
+    FROM T1
+    LEFT JOIN T2
+        USING (user_id)
+    WHERE state = 'Gujarat'
+      AND order_date >= '2019-01-01'
+      AND order_date < '2020-01-01'
+    GROUP BY 1
+),
+
+growth AS (
+    SELECT
+        month,
+        units,
+        LAG(units) OVER (ORDER BY month) AS previous_units
+    FROM monthly_units
+)
+
+SELECT
+    month,
+    units,
+    100.0 * (units - previous_units)
+        / NULLIF(previous_units, 0) AS growth_percent
+FROM growth
+ORDER BY growth_percent DESC
+LIMIT 1;
+-------------------------------------------------------------
 a) WITH monthly_orders AS (
     SELECT
         DATE_TRUNC('month', t1.date) AS month,
