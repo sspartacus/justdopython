@@ -72,6 +72,44 @@ Q2) Given the tables Order_Timeline(schema id,order_id,  message, created) & Ord
 Order_Timeline contains the message for the expected dispatch date, Order_shipment gives you the real dispatch date. They are combined using order_id.
 
 Ans. 
+WITH message_date AS (
+    SELECT
+        order_id,
+        MIN(created) AS first_msg_date
+    FROM Order_Timeline
+    GROUP BY order_id
+),
+
+order_diff AS (
+    SELECT
+        os.order_id,
+        os.actual_dispatch_date,
+        md.first_msg_date,
+        DATE_DIFF(
+            DATE(os.actual_dispatch_date),
+            DATE(md.first_msg_date),
+            DAY
+        ) AS diff
+    FROM Order_Shipment os
+    LEFT JOIN message_date md
+        USING (order_id)
+)
+
+SELECT
+    COUNT(DISTINCT CASE WHEN diff <= 0 THEN order_id END)
+        / COUNT(DISTINCT order_id) AS percent_otif,
+
+    COUNT(DISTINCT CASE WHEN diff = 1 THEN order_id END)
+        / COUNT(DISTINCT order_id) AS percent_otif_plus_1,
+
+    COUNT(DISTINCT CASE WHEN diff = 2 THEN order_id END)
+        / COUNT(DISTINCT order_id) AS percent_otif_plus_2,
+
+    COUNT(DISTINCT CASE WHEN diff > 2 THEN order_id END)
+        / COUNT(DISTINCT order_id) AS percent_otif_plus_2_plus
+
+FROM order_diff;
+-----------------------------------------------------------------------------
 WITH first_message_date AS (
     SELECT
         order_id,
