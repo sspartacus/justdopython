@@ -1,6 +1,7 @@
 Q.1 What is the difference between Dense Rank and Rank function? 
 Q.2 Use Substring function to find last 6 character of the string? 
 substring('Sadasdasd213123123sdfsfd', 19 , 6)
+SUBSTRING(expression, start_position, length)
 
 Q.3 Find the cumulative sum of total salary with bonus for project_id? 
 sum(salary) over (partition by project_id order by Emp_id rows between unbounded preceding and current row) + 
