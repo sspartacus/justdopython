@@ -18,12 +18,31 @@ arr = ['a', 'e', 'i', 'o', 'u']
 type(arr)
 
 Q.6 What would you identify Null Values in a dataset? And how do you deal with those? 
+df.isnull().sum() 
+
+1. Remove the records if only a very small number of rows are affected
+2. Impute the values using mean/median/mode
+3. Forward-fill/back-fill for time-series data
+
+
 Q.7) If the data is having Male and Female then how would you do the imputation and how if the data is numerical? 
+df['Gender'] = df['Gender'].fillna(df['Gender'].mode()[0])
+
+Non Skewed Numerical: 
+df['Salary'] = df['Salary'].fillna(df['Salary'].mean())
+
+Skewed Numerical Data: 
+df['Salary'] = df['Salary'].fillna(df['Salary'].median())
+
 Q.8) What would you identify outliers in a dataset? 
 1) Box-Plot Method 
 2) Z-Score Method
+Z = (X - mean) / standard_deviation
 NOTE: The data should have normal distribution
-3) Interquartile-Range
+3) Interquartile-Range: 
+Lower Bound = Q1 - 1.5 × IQR
+Upper Bound = Q3 + 1.5 × IQR
+IQR = Q3-Q1
 Q.9) What is Conditional probability? 
 The chances that some outcome (A) occurs given that another event (B) has also occurred.
 P(B∣A)=P(A∩B)/P(A)
