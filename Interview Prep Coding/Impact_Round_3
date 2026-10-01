@@ -25,7 +25,6 @@ ARIMA/SARIMA
 Prophet
 ML models such as XGBoost with time-based features
 
-Step 4: 
 Step 7: Check forecast against business expectations
 Finally, I'd compare the forecast with:
 Historical trends
