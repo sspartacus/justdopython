@@ -19,3 +19,12 @@ dependent and independent variables whereas losgistic regression assumes linear 
 
 Q.3 How would you deal with null values? 
 Q.4 What is the difference between a list and tuple? 
+| Feature                 | List                 | Tuple                         |
+| ----------------------- | -------------------- | ----------------------------- |
+| Syntax                  | `[ ]`                | `( )`                         |
+| Mutable                 | ✅ Yes                | ❌ No                          |
+| Can add/remove elements | ✅ Yes                | ❌ No                          |
+| Ordered                 | ✅ Yes                | ✅ Yes                         |
+| Allows duplicates       | ✅ Yes                | ✅ Yes                         |
+| Performance             | Relatively slower    | Relatively faster             |
+| Use case                | Data that may change | Data that should remain fixed |
