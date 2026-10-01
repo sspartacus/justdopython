@@ -47,3 +47,27 @@ Tell me ways of doing that?
 Q.5 Why is where not in not recommended in the previous question? 
 Will lead to sequential scan
 
+Q/6 Join V/s NOT Exists V/s NOT IN
+JOIN 
+SELECT c.*
+FROM customers c
+LEFT JOIN orders o
+    ON c.customer_id = o.customer_id
+WHERE o.customer_id IS NULL;
+
+NOT EXISTS
+SELECT *
+FROM customers c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM orders o
+    WHERE o.customer_id = c.customer_id
+);
+
+NOT IN 
+SELECT *
+FROM customers c
+WHERE c.customer_id NOT IN (
+    SELECT customer_id
+    FROM orders
+);
