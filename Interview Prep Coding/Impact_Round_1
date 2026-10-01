@@ -10,6 +10,19 @@ age_average = df.groupby(by= 'age').aggregate('cst_credit_score').mean()
 result = df1.merge( df2, how = 'left, on = 'age') 
 cols = ['age', 'age_count', 'age_average']
 result[cols]
+---------
+age_count = (
+    df.groupby('age')
+      .size()
+      .reset_index(name='age_count')
+)
+
+age_average = (
+    df.groupby('age')['cst_credit_score']
+      .mean()
+      .reset_index(name='age_average')
+)
+
 
 Q.4 Replaces null values in a dataframe with 0 ? 
 result = df.isna()
