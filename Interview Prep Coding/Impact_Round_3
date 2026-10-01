@@ -5,9 +5,7 @@ What are the steps you will take to forecast it?
 3) Perform Time series analysis/EDA on the cleaned data to understand its underlying patterns, seasonality, and trends.
 -------------
 Step 2: Explore the historical data
-
 I would perform:
-
 Time-series visualization
 Trend analysis
 Seasonality analysis
@@ -27,6 +25,16 @@ ARIMA/SARIMA
 Prophet
 ML models such as XGBoost with time-based features
 
+Step 4: 
+Step 7: Check forecast against business expectations
+Finally, I'd compare the forecast with:
+Historical trends
+Current sales trajectory
+Business targets
+Promotions planned
+Inventory constraints
+Expected market changes
+Then I'd present a baseline forecast plus an uncertainty range, rather than treating the forecast as an exact number.
 
 Q.2 Sam has 3000 bananas. He takes them to market 1000 km away on his only camel. The camel can only carry 1000 bananas at a time. The camel eats 1 banana for every 1 km it travels. 
 What is the maximum number of bananas that Sam can take to the market?
