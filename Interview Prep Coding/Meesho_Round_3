@@ -2,3 +2,9 @@ Q.1 Tell me about a project that you are proud of?
 Q.2 Why did you left Porter? 
 Q.3 Tell me the reasons why the customers are placing returns requests 
 when the order is between the order_shipped_time and  delivery_time? 
+1. Customer changed their mind
+2. Expected delivery is too late
+3. Customer ordered the wrong product
+4. Customer found a cheaper alternative.
+5. Customer realizes they won't be available at the delivery address.
+6. Payment Issues
