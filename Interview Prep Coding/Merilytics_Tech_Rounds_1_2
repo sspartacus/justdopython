@@ -25,6 +25,30 @@ for i in dic.keys():
 if count < 3: 
   print('No 3rd Repititive character')
 
+
+-------------------------------------
+string = 'mississippi' 
+dic = {}
+
+for i in string: 
+  if i in dic:
+    dic[i] +=1 
+  else: 
+    dic[i] = 1
+
+
+count = 0
+for i in dic: 
+  if dic[i] >1: 
+    count+= 1
+
+    if count == 3: 
+      print(i)
+      pass
+
+if count < 3: 
+  print("no 3rd repitive character")
+
 Round 2 
 5) Write a Query to output all the duplicate entries in a table? 
 select * from employee
