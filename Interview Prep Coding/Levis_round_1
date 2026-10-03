@@ -146,7 +146,7 @@ For example, 202611 represents November 2026.
 Data type: INTEGER
 Explain below code
 
-ds4_df.loc[     ds4_df["FYM_snp_date"].astype(str).str[:4]   
+ds4_df.loc[ds4_df["FYM_snp_date"].astype(str).str[:4]   
   == ds4_df["FISCAL"].astype(str).str[:4],    
   "lag" ] = ds4_df["FISCAL"] - ds4_df["FYM_snp_date"] ds4_df.loc[   
   ds4_df["FYM_snp_date"].astype(str).str[:4]     != ds4_df["FISCAL"].astype(str).str[:4],    
