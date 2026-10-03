@@ -1,0 +1,53 @@
+Q. 1 Find the total revenue, total quantity sold for each customer 
+ Find the total uniques customer, total orders, average order value
+
+
+Q.2 For each customer
+
+
+
+Q.3 
+a) ### PART I ### pg_insights = season_ds4_df[     season_ds4_df["SEAS"] == season_ds4_df["SEAS"].max() ].groupby(     [         "REGION",         "AFFILIATE_DESC",     
+    "PG_DESC",         "SEAS"     ],     as_index=False ).agg({  
+	"abs_error": "sum",     "Actuals": "sum" }).rename(columns={"PG_DESC": "KPI"})
+
+	### PART II ### pg_insights["level"] = "PG" pg_insights["MAPE"] = round(     pg_insights["abs_error"] / pg_insights["Actuals"], 3 )
+	pg_insights = pg_insights[pg_insights["Actuals"] > 1000]
+
+
+	### PART III ### def top_bottom_n_distinct(group, n=5):     group = group.sort_values("MAPE", ascending=False)     
+	total = len(group)     if total >= 2 * n:        
+	top = group.head(n).copy()         
+	bottom = group.tail(n).copy()    
+	elif total > 1:         split = total // 2        
+	top = group.head(split).copy()     
+    bottom = group.tail(total - split).copy()   
+	else:         top = group.copy()      
+	bottom = pd.DataFrame(columns=group.columns)   
+	top["Position"] = "highest MAPE"   
+	bottom["Position"] = "lowest MAPE"     
+	return pd.concat([top, bottom])
+
+	### PART IV ### pg_insights = pg_insights.groupby(     "AFFILIATE_DESC",     group_keys=False ).apply(top_bottom_n_distinct, n=5)
+
+
+
+b) ds4_df is a dataframe.
+
+Column Definitions
+
+FYM_snp_date: Indicates the month when the data was archived, in YYYYMM format.
+For example, 202611 represents November 2026.
+Data type: INTEGER
+FISCAL: Indicates the month when the order was placed, in YYYYMM format.
+For example, 202611 represents November 2026.
+Data type: INTEGER
+Explain below code
+
+ds4_df.loc[     ds4_df["FYM_snp_date"].astype(str).str[:4]   
+  == ds4_df["FISCAL"].astype(str).str[:4],    
+  "lag" ] = ds4_df["FISCAL"] - ds4_df["FYM_snp_date"] ds4_df.loc[   
+  ds4_df["FYM_snp_date"].astype(str).str[:4]     != ds4_df["FISCAL"].astype(str).str[:4],    
+  "lag" ] = (     ds4_df["FISCAL"].astype(str).str[-2:].astype(int)  
+  + (12 - ds4_df["FYM_snp_date"].astype(str).str[-2:].astype(int)) ) 
+  ds4_df["lag"] = ds4_df["lag"].astype(int)
