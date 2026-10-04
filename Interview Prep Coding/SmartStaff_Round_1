@@ -29,7 +29,46 @@ Table: Rent
 +---------------------+-----------+
 
 List the months where each user skipped the rent. (Assuming there’s a calendar table)
+----------AI Solutions
+-- Step 1: Expected combinations
+WITH rent_tab AS (
+    SELECT
+        DATE_TRUNC('month', date) AS month,
+        student_id,
+        rent_paid
+    FROM Rent
+),
 
+calendar AS (
+    SELECT DISTINCT
+        DATE_TRUNC('month', date) AS month
+    FROM Rent
+),
+
+students AS (
+    SELECT DISTINCT student_id
+    FROM Rent
+),
+
+student_calendar AS (
+    SELECT
+        c.month,
+        s.student_id
+    FROM calendar c
+    CROSS JOIN students s
+)
+
+SELECT
+    sc.month,
+    sc.student_id
+FROM student_calendar sc
+LEFT JOIN rent_tab r
+    ON sc.month = r.month
+    AND sc.student_id = r.student_id
+WHERE r.student_id IS NULL
+ORDER BY sc.month, sc.student_id;
+
+-------------------------------------------------
 -- Step 1: Expected combinations
 WITH expected AS (
   SELECT DISTINCT s.student_id, s.name, DATE_TRUNC('month', c.date) AS month
