@@ -1,10 +1,41 @@
 Q.1 If there are user_id in Table A and user_id in Table B. How can you find the common users between the two tables? 
 Q.2 Which one is the fastest among the four techniques that you discussed? 
 1) WHERE & IN
+SELECT DISTINCT user_id
+FROM Table_A
+WHERE user_id IN (
+    SELECT user_id
+    FROM Table_B
+);
 2) JOIN & IS NULL: Slowest
+SELECT DISTINCT a.user_id
+FROM Table_A a
+INNER JOIN Table_B b
+    ON a.user_id = b.user_id;
 3) INTERSECT 
+SELECT user_id
+FROM Table_A
+INTERSECT
+SELECT user_id
+FROM Table_B;
 4) EXISTS
+SELECT DISTINCT a.user_id
+FROM Table_A a
+WHERE EXISTS (
+    SELECT 1
+    FROM Table_B b
+    WHERE b.user_id = a.user_id
+);
 5) USING MAX: Fastest
+SELECT user_id
+FROM (
+    SELECT user_id, 'A' AS source FROM Table_A
+    UNION ALL
+    SELECT user_id, 'B' AS source FROM Table_B
+) t
+GROUP BY user_id
+HAVING MAX(CASE WHEN source = 'A' THEN 1 ELSE 0 END) = 1
+   AND MAX(CASE WHEN source = 'B' THEN 1 ELSE 0 END) = 1;
 
 | Method         | Efficiency                      | Notes                              |
 | -------------- | ------------------------------- | ---------------------------------- |
