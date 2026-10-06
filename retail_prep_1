@@ -1,0 +1,64 @@
+Q.1 .
+Size curve = distribution of customer demand across different sizes.
+Size grid = the set of sizes that a store/product/channel actually carries.
+Size availability = whether the required size is actually available to the customer when they want to buy it.
+Size productivity = how effectively each size contributes to sales/demand relative to the inventory or space allocated to it.
+
+| #      | Term                       | Simple meaning                                                                                                       |
+| ------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **1**  | **Sell-through**           | % of inventory sold during a period. **Formula:** Units Sold ÷ Units Available × 100                                 |
+| **2**  | **Stockout**               | When a product/size has **zero inventory available** despite customer demand.                                        |
+| **3**  | **In-stock %**             | % of time or product-size combinations where inventory is available. Higher = better availability.                   |
+| **4**  | **Weeks of Supply (WOS)**  | How many weeks the current inventory can support expected demand. **Inventory ÷ Weekly Demand**                      |
+| **5**  | **Inventory Turnover**     | How quickly inventory is sold and replaced. Higher turnover generally means inventory is moving faster.              |
+| **6**  | **Demand**                 | The quantity customers **want to buy**, whether or not inventory was available.                                      |
+| **7**  | **Forecast**               | Estimated future demand/sales based on historical data, trends, seasonality, etc.                                    |
+| **8**  | **Allocation**             | Deciding **how much inventory to send to each store/channel/location**.                                              |
+| **9**  | **Replenishment**          | Restocking inventory when existing inventory gets low or demand requires more stock.                                 |
+| **10** | **Size Curve**             | Distribution of demand/sales across different sizes. Example: S=20%, M=35%, L=30%, XL=15%.                           |
+| **11** | **Size Availability**      | Whether the **size customers want is actually available** for purchase.                                              |
+| **12** | **Full-price Sales**       | Sales made at the **original/list price**, without markdown or discount.                                             |
+| **13** | **Markdown**               | Reducing the selling price of a product to stimulate sales or reduce excess inventory.                               |
+| **14** | **Clearance**              | Selling remaining/excess/old inventory, usually at a **significantly reduced price**, to clear stock.                |
+| **15** | **Pre-season Planning**    | Planning **before the selling season**—forecasting demand, deciding assortment, size grid, inventory and allocation. |
+| **16** | **In-season Optimization** | Making **real-time adjustments during the season** based on actual sales, demand, inventory, stockouts and trends.   |
+
+
+Q.2 
+Size/Grid productivity Analysis: Size 32 appears under-inventoried relative to demand, while size 36 appears over-inventoried. 
+However, I would validate this against stockout duration, store/channel differences, seasonality and replenishment before changing the size grid
+
+
+Q.3 How would you validate an ML-generated size profile
+Compare predicted size distribution with actual demand.
+Calculate error at size level.
+Check performance across stores/regions/product categories.
+Identify systematic bias.
+Compare against a baseline.
+Check whether errors are concentrated in certain sizes.
+Share structured feedback with Data Science.
+Validate whether model improvements actually improve business metrics.
+
+Q.4 Excel:
+XLOOKUP
+INDEX/MATCH
+SUMIFS
+COUNTIFS
+Pivot tables
+Conditional formatting
+Data cleaning
+Basic statistical calculations
+Charts
+What-if analysis
+
+Q.5 Why are you interested in this role? Why you want to leave your current role?
+What attracts me is the combination of retail analytics, inventory optimization and digital sizing. My current experience is already around inventory, 
+allocation and retail decision-making, and this role would allow me to apply that experience to a more specialized sizing problem 
+while also working with ML-driven products.
+
+
+Q.6 How would you measure lost sales due to size stockouts?
+Lost Sales ≈ Expected Demand during Stockout − Actual Sales
+= 150-50
+=> 100* Average selling price (2000)
+=> 200000
