@@ -62,3 +62,75 @@ Lost Sales ≈ Expected Demand during Stockout − Actual Sales
 = 150-50
 => 100* Average selling price (2000)
 => 200000
+
+Q.7 
+a) Led the Newness Prioritization feature, optimizing inventory allocation chronologically by floor-set data to ensure earlier fulfillment, 
+projecting a 5% increase in store sell-through rate and a reduction in markdown risk.
+Ans One of the problems we had was around new products or newness. Different products have different floor-set dates, which means the business want 
+certain products to reach stores earlier based on when they are supposed to be launched on the sales floor.
+I worked on a Newness Prioritization feature where we used floor-set dates to prioritize inventory allocation. 
+Instead of treating all products equally, we prioritized products with earlier floor-set dates so that inventory reached the right 
+stores in time for the planned launch. This helped improve the alignment between inventory availability and the planned selling calendar. 
+We projected around a 5% improvement in store sell-through and also expected to reduce markdown risk because products were available 
+closer to their intended selling period.
+
+b) Why does this reduce markdown?
+"If a product reaches the store late, we lose part of its selling window. That can result in slower sales and eventually markdowns to clear the inventory. 
+By prioritizing products according to their floor-set dates, 
+we improve the probability that the inventory is available when customers are expected to buy it."
+
+c) Minimized stockouts by 10% through the implementation of King's Formula for safety stock calculation...
+"One of the inventory problems we were trying to solve was stockouts. The challenge was that simply using average demand wasn't sufficient
+because both demand and lead time could vary.
+I worked on implementing King's Formula for safety stock, where we considered demand variability as well as lead-time variability. 
+The objective was to determine a more appropriate buffer inventory rather than using a fixed safety-stock number.
+We then used that safety stock as part of the replenishment and inventory planning logic. This helped reduce stockouts by approximately 10%."
+
+"Why do we need safety stock?"
+"Because actual demand and lead time aren't perfectly predictable. Safety stock acts as a buffer against that uncertainty so that inventory 
+doesn't run out before replenishment arrives."
+
+"Why consider lead-time variability?"
+"Even if demand is stable, if suppliers or distribution centers sometimes take longer to replenish, we need additional 
+buffer inventory to protect against that uncertainty."
+
+d) Enhanced store-level inventory accuracy by 12% by implementing Core vs. Fashion product segmentation...
+We realized that different products behave differently from an inventory perspective. Core products have relatively stable and 
+predictable demand because they are continuously sold, whereas fashion products tend to have more variable and seasonal demand.
+So instead of applying the same safety-stock logic to all products, I worked on segmenting products into Core and Fashion based on sales 
+consistency and demand behavior.
+We then used Pareto analysis to understand which products contributed most significantly to sales and adjusted inventory 
+and safety-stock logic accordingly.
+This improved the accuracy of store-level inventory planning by around 12%
+
+"Why shouldn't you use the same safety-stock approach for Core and Fashion?"
+"Because their demand patterns are different. Core products typically have more stable demand and can support more reliable historical estimates,
+whereas fashion products can have higher volatility, shorter life cycles and stronger seasonality. 
+Therefore, applying the same inventory assumptions can lead to overstocking or stockouts."
+
+e) Developed advanced demand forecasting algorithms that improved accuracy by 20%, directly impacting inventory planning and reducing stockouts by 15%.
+Another project I worked on was demand forecasting for supply-chain planning. The objective was to estimate future demand more accurately 
+so that inventory decisions could be made proactively.
+I worked with historical sales and relevant demand drivers and developed forecasting models using Python and 
+machine-learning techniques. We evaluated the forecasts against actual demand and iterated on the approach.
+The improved forecast accuracy helped the business make better inventory planning decisions. We saw approximately a 20% improvement in forecast accuracy, 
+which contributed to a reduction in stockouts
+
+Expected Answer: "I have worked extensively on inventory and supply-chain analytics, including safety stock, allocation and inventory optimization. 
+I have also had exposure to ML-based analytical approaches. I haven't independently owned a production demand-forecasting model end-to-end,
+but I understand the methodology and how forecast outputs feed into inventory planning, allocation and replenishment."
+
+f) Optimized inventory levels through predictive analytics, resulting in a 10% reduction in carrying costs.
+"The objective here was to avoid both sides of the inventory problem — understocking and overstocking.
+We used predictive analytics to estimate expected demand and identify inventory levels that were higher than what was required. 
+This allowed us to identify opportunities to reduce excess inventory while maintaining the required service level.
+As a result, we were able to reduce inventory carrying costs by approximately 10%."
+
+"How do you know you're not reducing inventory too aggressively?"
+"I wouldn't optimize only for inventory reduction. I'd balance inventory cost against service-level metrics such as stockouts, in-stock percentage, fill rate and lost sales. 
+The objective is to minimize excess inventory while maintaining the required product availability."
+
+g) Utilized Python extensively for data manipulation, model development, and deployment.
+I primarily use Python for three areas: data preparation and analysis using Pandas, model development and evaluation using ML libraries, 
+and automation/deployment of analytical workflows. For example, in the demand forecasting project, 
+Python was used for data preparation, feature engineering, model development and evaluating the predictions against actual demand
