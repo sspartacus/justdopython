@@ -12,6 +12,55 @@ WHERE ends >= (CURRENT_DATE - INTERVAL '6 months')
 GROUP BY 1
 ORDER BY 1;
 
+---------------------
+WITH monthly AS (
+    SELECT
+        u.city,
+        DATE_TRUNC('month', b.ends) AS month,
+        AVG(b.total_fare) AS atv,
+        AVG(EXTRACT(EPOCH FROM (b.ends - b.starts)) / 3600) AS atd
+    FROM Booking b
+    JOIN User u
+        ON b.user_id = u.id
+    WHERE b.ends >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '5 months'
+    GROUP BY
+        u.city,
+        DATE_TRUNC('month', b.ends)
+),
+
+mom AS (
+    SELECT
+        city,
+        month,
+        atv,
+        atd,
+        LAG(atv) OVER (
+            PARTITION BY city
+            ORDER BY month
+        ) AS prev_atv,
+        LAG(atd) OVER (
+            PARTITION BY city
+            ORDER BY month
+        ) AS prev_atd
+    FROM monthly
+)
+
+SELECT
+    city,
+    month,
+    atv,
+    atd,
+    ROUND(
+        100.0 * (atv - prev_atv) / NULLIF(prev_atv, 0),
+        2
+    ) AS atv_mom_pct,
+    ROUND(
+        100.0 * (atd - prev_atd) / NULLIF(prev_atd, 0),
+        2
+    ) AS atd_mom_pct
+FROM mom
+ORDER BY city, month;
+
 
 Q2	for last one month top 3 earning cars in each type
 SELECT 
