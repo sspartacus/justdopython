@@ -24,7 +24,7 @@ Size productivity = how effectively each size contributes to sales/demand relati
 | **16** | **In-season Optimization** | Making **real-time adjustments during the season** based on actual sales, demand, inventory, stockouts and trends.   |
 
 
-Q.2 
+Q.2 Will you change Size Grid? If yes then on what factors
 Size/Grid productivity Analysis: Size 32 appears under-inventoried relative to demand, while size 36 appears over-inventoried. 
 However, I would validate this against stockout duration, store/channel differences, seasonality and replenishment before changing the size grid
 
