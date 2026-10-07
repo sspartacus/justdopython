@@ -12,6 +12,17 @@ FROM original_table;
 
 Q.2 If you cross join it with same table then how will you get the same results again. 
 Q.3 What is the difference b/w bagging and boosting? 
+|             | **Bagging**                                | **Boosting**                                   |
+| ----------- | ------------------------------------------ | ---------------------------------------------- |
+| Full form   | Bootstrap Aggregating                      | Boosting                                       |
+| Main idea   | Train models **independently/in parallel** | Train models **sequentially**                  |
+| Focus       | Mainly reduces **variance**                | Mainly reduces **bias**                        |
+| Training    | Each model sees a different random sample  | Each new model focuses more on previous errors |
+| Combining   | Usually **averaging/voting**               | Usually a weighted combination                 |
+| Example     | Random Forest                              | XGBoost, AdaBoost, Gradient Boosting           |
+| Overfitting | Generally less prone                       | Can overfit if not tuned properly              |
+| Speed       | Can be parallelized                        | Sequential, so generally harder to parallelize |
+
 Q.4 What is the difference b/w Classification and Regression? 
 
 
