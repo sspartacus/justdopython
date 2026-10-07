@@ -106,6 +106,15 @@ UNION ALL
 SELECT NULL AS A, NULL AS B, C, D
 FROM Table2;
 
+----------
+SELECT 
+    t1.A,
+    t1.B,
+    t2.C,
+    t2.D
+FROM Table1 t1
+CROSS JOIN Table2 t2;
+
 Q.11 The table given below has 2 columns, item | sales, there are say 20 distinct items, how will we get the % sales contribution of each of the items?
 Sol. WITH total_sales as ( 
 Select sum(sales) as t_sales
