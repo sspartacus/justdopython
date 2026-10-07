@@ -28,9 +28,9 @@ P values are used in hypothesis testing to help decide whether to reject the nul
 p < 0.05; Reject Null Hypothesis 
 
 Q.7 IWD Coding Challenge? 
-In how many ways can we replace a string ex. ?2 where ? can be replaced with 0-9 such that the numbers it should not be equal to number preceding it and number 
+In how many ways can we replace a string ex. 3?2 where ? can be replaced with 0-9 such that the numbers it should not be equal to number preceding it and number 
 following it? 
-
+8 ways
 
 
 
