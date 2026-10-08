@@ -1,1 +1,10 @@
-Q.1 If you have a explain a 
+Q.1 If you have a explain a technical analysis to a non-technical stakeholder? How have you explain and what was the outcome? 
+There is report we present it to client where we explain a FWOS concept to a non teachnical stakeholder. We found that the FWOS number was not correct 
+so we connected with the dev team and explain the issue. Finally we found that the number was not correct and therefore we fix it. 
+
+Q.2 If you found a data quality issue, how did you fix it and what was the outcome? 
+We found that the macro that was provided has size id column instead of concat of size id and size name. So we have explained this to clients and the data was fixed
+from thier end itself. Once the data was fixed, we have upload the macro again to check if it was giving the same macro error. 
+
+Q.3 
+
