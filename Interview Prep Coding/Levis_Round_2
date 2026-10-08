@@ -6,5 +6,19 @@ Q.2 If you found a data quality issue, how did you fix it and what was the outco
 We found that the macro that was provided has size id column instead of concat of size id and size name. So we have explained this to clients and the data was fixed
 from thier end itself. Once the data was fixed, we have upload the macro again to check if it was giving the same macro error. 
 
-Q.3 
+Q.3 If there is a task where will take 3 days to complete and you need to complete it in a day? How will you approach? 
+1) Proactive Communication with stakeholder
+2) Based upon time and business impact i will decide the priority of tasks that i am taking up
+
+Q.4 Could you tell me a project where you have built data pipelines for reporting and what technology have you used? 
+Used Pandas, Numpy Seaborn and matplotlib libraries to build the trend line chart that will give the missed and cancellations order trend. 
+This provided the city team operaations team clarity on why the cancellations are happening and build strategies on top of them
+
+Q.5 Cold you help me a time where you have used Python in your project? 
+Have build a LCV and HCV dashbord where i have used Python to bridge the gap between the database and google sheet. 
+This was done using G SHeets API integration
+This saved a lot of manual effort from city team 
+
+Q.6 Could you provide details upon how have you build the AI automation and monitoring agent? 
+This was built for 3 regions have both UAT and PROD. This helped team to save more than 10 hours per week.
 
